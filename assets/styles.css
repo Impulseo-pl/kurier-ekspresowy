@@ -1,49 +1,41 @@
 /* ==========================================================================
-   Kurier ekspresowy — arkusz stylów
-   Paleta z logo klienta: czerwień i granat z orła Polski Express 24,
-   granatowa noc jako tło, papier listu przewozowego na sekcje jasne.
+   Polski Express 24 — arkusz stylów
+   Jasny układ: biel i bardzo jasny błękit, granat z logo na tekst,
+   czerwień z logo wyłącznie na akcenty i wezwania do działania.
    ========================================================================== */
 
 :root{
-  /* marka */
-  --sygnal:      #E63946;   /* czerwień z logo — akcenty na ciemnym tle */
-  --sygnal-cien: #C1121F;
-  --pomarancz:   #C1121F;   /* ta sama czerwień przygaszona, na jasnym tle */
-  --rdza:        #A00E1A;   /* do tekstu na jasnym tle, kontrast AA */
-  --bursztyn:    #E8A11F;   /* gwiazdki ocen */
-  --granat:      #1B2A55;   /* granat z logo — wypełnienie Polski na mapach */
+  --granat:     #16295C;   /* granat z logo — nagłówki i ciemne elementy */
+  --granat-2:   #24386F;
+  --granat-3:   #0F1D42;
+  --czerwien:   #E1252B;   /* czerwień z logo — akcenty, przyciski */
+  --czerwien-2: #C11017;
+  --zielen:     #2BA84A;   /* potwierdzenia na listach */
 
-  /* ciemne partie */
-  --grafit:   #101728;
-  --grafit-2: #161F35;
-  --stal:     #243149;
-  --stal-2:   #35456A;
-  --mgla:     #94A0BC;
+  --biel:     #FFFFFF;
+  --blekit:   #F4F8FD;
+  --blekit-2: #E9F1FA;
+  --kreska:   #DCE5F0;
+  --tekst:    #2E3A4F;
+  --tekst-2:  #5F6C84;
 
-  /* jasne partie */
-  --papier:   #F3F4F8;
-  --papier-2: #E4E7EE;
-  --kreska:   #CFD4E0;
-  --atrament: #101728;
-  --szary:    #5A6478;
-
-  --max: 1240px;
+  --max: 1200px;
   --gut: 24px;
-
   --tempo: cubic-bezier(.22,.61,.36,1);
+  --cien: 0 2px 4px rgba(22,41,92,.05), 0 12px 28px rgba(22,41,92,.07);
+  --cien-mocny: 0 4px 10px rgba(22,41,92,.09), 0 18px 44px rgba(22,41,92,.12);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
-
-html{ scroll-behavior:smooth; scroll-padding-top:76px; }
+html{ scroll-behavior:smooth; scroll-padding-top:96px; }
 
 body{
   margin:0;
-  background:var(--papier);
-  color:var(--atrament);
+  background:var(--biel);
+  color:var(--tekst);
   font-family:'Archivo','Segoe UI',system-ui,sans-serif;
   font-size:17px;
-  line-height:1.6;
+  line-height:1.62;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
@@ -51,564 +43,396 @@ body{
 img{ max-width:100%; display:block; }
 a{ color:inherit; }
 
-/* ziarno zamiast rozmytych poświat — dodaje "papieru" ciemnym sekcjom */
-.ziarno::after{
-  content:''; position:absolute; inset:0; pointer-events:none; z-index:3;
-  opacity:.16; mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)' opacity='.55'/></svg>");
-}
+.wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--gut); position:relative; }
 
-.wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--gut); position:relative; z-index:4; }
-
-/* ---------- typografia ---------- */
-h1,h2,h3,h4{ margin:0; font-weight:700; letter-spacing:-.022em; line-height:1.08; }
-h1{ font-size:clamp(34px,5.6vw,62px); font-weight:800; }
-h2{ font-size:clamp(27px,3.6vw,42px); }
-h3{ font-size:clamp(19px,1.6vw,22px); letter-spacing:-.012em; }
+h1,h2,h3,h4{ margin:0; color:var(--granat); font-weight:700; letter-spacing:-.02em; line-height:1.14; }
+h1{ font-size:clamp(32px,4.6vw,52px); font-weight:800; letter-spacing:-.028em; line-height:1.08; }
+h2{ font-size:clamp(26px,3.2vw,38px); }
+h3{ font-size:clamp(18px,1.5vw,21px); }
 p{ margin:0 0 1em; }
 
 .mono{
-  font-family:'IBM Plex Mono',ui-monospace,'Consolas',monospace;
-  font-size:12px; letter-spacing:.1em; text-transform:uppercase; font-weight:500;
+  font-family:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  font-size:12px; letter-spacing:.09em; text-transform:uppercase; font-weight:500;
 }
 
-.etykieta{
-  display:flex; align-items:center; gap:10px;
-  font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.18em;
-  text-transform:uppercase; color:var(--rdza); font-weight:500;
-  margin-bottom:18px;
+.nad{
+  display:block; color:var(--czerwien); font-weight:700; font-size:13.5px;
+  letter-spacing:.14em; text-transform:uppercase; margin-bottom:14px;
 }
-.etykieta::before{ content:''; width:26px; height:2px; background:var(--pomarancz); flex:none; }
-.ciemna .etykieta{ color:var(--sygnal); }
-.ciemna .etykieta::before{ background:var(--sygnal); }
 
-.oloowek{ color:var(--szary); font-size:17px; max-width:56ch; }
-.ciemna .oloowek{ color:var(--mgla); }
+.olowek{ color:var(--tekst-2); max-width:62ch; font-size:17px; }
 
-/* ---------- znak firmowy (odrysowany z logo klienta) ---------- */
-.znak{ display:inline-block; line-height:1; text-decoration:none; }
-.znak__glowny{
-  display:block; font-weight:800; font-size:var(--znak,21px);
-  letter-spacing:-.045em; color:var(--atrament);
-}
-.znak__drugi{
-  display:block; text-align:right; font-weight:800;
-  font-size:calc(var(--znak,21px) * .455); letter-spacing:-.02em;
-  color:var(--pomarancz); margin-top:calc(var(--znak,21px) * -.06);
-}
-.znak__podpis{
-  display:block; text-align:center; margin-top:calc(var(--znak,21px)*.16);
-  font-family:'IBM Plex Mono',monospace; font-weight:400;
-  font-size:calc(var(--znak,21px) * .2); letter-spacing:.03em; color:var(--szary);
-}
-.na-ciemnym .znak__glowny{ color:#fff; }
-.na-ciemnym .znak__drugi{ color:var(--sygnal); }
-.na-ciemnym .znak__podpis{ color:var(--mgla); }
+.sekcja{ padding:clamp(56px,7vw,92px) 0; }
+.sekcja--blekit{ background:var(--blekit); }
+.naglowek{ max-width:64ch; margin-bottom:clamp(32px,4vw,48px); }
+.naglowek--srodek{ margin-left:auto; margin-right:auto; text-align:center; }
+.naglowek--srodek .olowek{ margin-left:auto; margin-right:auto; }
 
 /* ==========================================================================
-   1. EKRAN ŁADOWANIA
+   1. GÓRNY PASEK I NAWIGACJA
    ========================================================================== */
-#loader{
-  position:fixed; inset:0; z-index:200; background:var(--grafit);
-  display:flex; align-items:center; justify-content:center; flex-direction:column;
-  overflow:hidden;
+.gorny{
+  background:var(--granat); color:rgba(255,255,255,.82);
+  font-size:13.5px; padding:9px 0;
 }
-#loader.znika{ animation:kurtyna .85s var(--tempo) forwards; }
-@keyframes kurtyna{ to{ clip-path:inset(0 0 100% 0); } }
+.gorny__rzad{ display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap; }
+.gorny a{ text-decoration:none; color:#fff; font-weight:600; }
+.gorny a:hover{ color:#FFD9DB; }
+.gorny__lewo{ display:flex; gap:22px; align-items:center; flex-wrap:wrap; }
+.gorny__poz{ display:inline-flex; align-items:center; gap:8px; }
+.gorny__poz svg{ width:15px; height:15px; opacity:.8; }
 
-.ladowanie{ position:relative; z-index:5; text-align:center; }
-
-/* znak w loaderze odsłania się przejazdem świetlnej linii */
-.ladowanie .znak{ --znak:clamp(38px,8vw,74px); position:relative; display:inline-block; }
-.ladowanie .znak__glowny,
-.ladowanie .znak__drugi,
-.ladowanie .znak__podpis{
-  clip-path:inset(0 100% 0 0);
-  animation:odslon .75s var(--tempo) forwards;
-}
-.ladowanie .znak__glowny{ animation-delay:.22s; }
-.ladowanie .znak__drugi{ animation-delay:.52s; }
-.ladowanie .znak__podpis{ animation-delay:.86s; opacity:0; animation-name:odslon-slabo; }
-@keyframes odslon{ to{ clip-path:inset(0 0 0 0); } }
-@keyframes odslon-slabo{ to{ clip-path:inset(0 0 0 0); opacity:1; } }
-
-/* iskra przebiegająca przez znak */
-.iskra{
-  position:absolute; top:-6%; height:112%; width:2px; left:0;
-  background:linear-gradient(180deg,transparent,var(--sygnal),transparent);
-  box-shadow:0 0 10px rgba(230,57,70,.65);
-  animation:przejazd 1.05s var(--tempo) .2s 1 forwards;
-}
-@keyframes przejazd{ 0%{left:-2%;opacity:0} 12%{opacity:1} 88%{opacity:1} 100%{left:102%;opacity:0} }
-
-.ladowanie__obwod{ width:min(340px,72vw); margin:34px auto 0; display:block; }
-.ladowanie__obwod path{
-  fill:none; stroke:var(--stal-2); stroke-width:1.4;
-  stroke-dasharray:var(--dl); stroke-dashoffset:var(--dl);
-  animation:rysuj 1.25s var(--tempo) .35s forwards;
-}
-.ladowanie__obwod .zywa{ stroke:var(--sygnal); stroke-width:1.8; }
-@keyframes rysuj{ to{ stroke-dashoffset:0; } }
-
-.ladowanie__licznik{
-  margin-top:26px; display:flex; justify-content:center; gap:18px; align-items:baseline;
-  color:var(--mgla);
-}
-.ladowanie__licznik b{ color:var(--sygnal); font-weight:500; font-variant-numeric:tabular-nums; }
-
-/* ==========================================================================
-   2. NAWIGACJA
-   ========================================================================== */
 .nawigacja{
-  position:fixed; top:0; left:0; right:0; z-index:100;
-  background:rgba(16,23,40,0);
-  border-bottom:1px solid transparent;
-  transition:background .35s var(--tempo), border-color .35s var(--tempo), backdrop-filter .35s;
+  position:sticky; top:0; z-index:100; background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px); border-bottom:1px solid var(--kreska);
+  transition:box-shadow .3s var(--tempo);
 }
-.nawigacja.przyklejona{
-  background:rgba(16,23,40,.93);
-  backdrop-filter:blur(9px) saturate(140%);
-  border-bottom-color:var(--stal);
-}
-.nawigacja__rzad{
-  display:flex; align-items:center; justify-content:space-between;
-  height:76px; gap:20px;
-}
-.menu{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+.nawigacja.przyklejona{ box-shadow:0 6px 24px rgba(22,41,92,.08); }
+.nawigacja__rzad{ display:flex; align-items:center; justify-content:space-between; gap:22px; height:78px; }
+
+.logo{ display:block; line-height:0; flex:none; }
+.logo img{ height:42px; width:auto; }
+
+.menu{ display:flex; gap:26px; list-style:none; margin:0; padding:0; }
 .menu a{
-  text-decoration:none; color:rgba(255,255,255,.82); font-size:15px; font-weight:500;
-  position:relative; padding:6px 0; transition:color .2s;
+  text-decoration:none; color:var(--granat); font-size:15.5px; font-weight:600;
+  padding:7px 0; position:relative; transition:color .2s;
 }
 .menu a::after{
-  content:''; position:absolute; left:0; right:100%; bottom:0; height:1.5px;
-  background:var(--sygnal); transition:right .3s var(--tempo);
+  content:''; position:absolute; left:0; right:100%; bottom:0; height:2px;
+  background:var(--czerwien); transition:right .28s var(--tempo);
 }
-.menu a:hover{ color:#fff; }
+.menu a:hover{ color:var(--czerwien); }
 .menu a:hover::after{ right:0; }
 
-.tel-nav{
-  display:inline-flex; align-items:center; gap:9px;
-  background:var(--sygnal); color:#101728; text-decoration:none;
-  padding:11px 18px; font-weight:700; font-size:15px;
-  border:1px solid var(--sygnal);
-  transition:background .2s, transform .2s;
-}
-.tel-nav:hover{ background:#F04B58; transform:translateY(-1px); }
-.tel-nav svg{ width:16px; height:16px; }
-
 .burger{ display:none; background:none; border:0; padding:8px; cursor:pointer; }
-.burger span{ display:block; width:24px; height:2px; background:#fff; margin:5px 0; transition:.3s var(--tempo); }
+.burger span{ display:block; width:24px; height:2px; background:var(--granat); margin:5px 0; transition:.3s var(--tempo); }
 .burger.otwarty span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
 .burger.otwarty span:nth-child(2){ opacity:0; }
 .burger.otwarty span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
 /* ==========================================================================
-   3. HERO
+   2. PRZYCISKI
    ========================================================================== */
-.ciemna{ background:var(--grafit); color:#fff; position:relative; }
-
-.hero{
-  min-height:100svh; display:flex; align-items:flex-end;
-  padding:150px 0 0; overflow:hidden;
-}
-.hero__tlo{ position:absolute; inset:0; z-index:0; }
-.hero__tlo img{ width:100%; height:100%; object-fit:cover; object-position:center 62%; }
-.hero__tlo::after{
-  content:''; position:absolute; inset:0;
-  background:
-    linear-gradient(180deg, rgba(16,23,40,.88) 0%, rgba(16,23,40,.52) 38%, rgba(16,23,40,.93) 88%),
-    linear-gradient(90deg, rgba(16,23,40,.86) 0%, rgba(16,23,40,.18) 62%);
-}
-
-.hero__tresc{ padding-bottom:40px; }
-.hero h1{ max-width:15ch; }
-.hero h1 em{ font-style:normal; color:var(--sygnal); }
-.hero__lead{ margin:22px 0 0; max-width:48ch; color:rgba(255,255,255,.8); font-size:18px; }
-
-.hero__akcje{ display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; }
-
 .guzik{
-  display:inline-flex; align-items:center; gap:11px;
-  padding:16px 26px; font-size:16px; font-weight:700; text-decoration:none;
-  border:1.5px solid transparent; cursor:pointer;
-  font-family:inherit; transition:.22s var(--tempo);
+  display:inline-flex; align-items:center; justify-content:center; gap:11px;
+  padding:16px 28px; font-size:16.5px; font-weight:700; text-decoration:none;
+  border:2px solid transparent; border-radius:6px; cursor:pointer;
+  font-family:inherit; transition:.22s var(--tempo); white-space:nowrap;
 }
-.guzik--prad{ background:var(--sygnal); color:#101728; border-color:var(--sygnal); }
-.guzik--prad:hover{ background:#F04B58; transform:translateY(-2px); }
-.guzik--obrys{ background:transparent; color:#fff; border-color:rgba(255,255,255,.34); }
-.guzik--obrys:hover{ border-color:#fff; background:rgba(255,255,255,.07); }
-.guzik--ciemny{ background:var(--atrament); color:#fff; border-color:var(--atrament); }
-.guzik--ciemny:hover{ background:#000; transform:translateY(-2px); }
-.guzik svg{ width:17px; height:17px; flex:none; }
-
-/* rysunek obwodu nad zdjęciem w hero */
-.hero__obwod{
-  position:absolute; right:-2%; top:12%; width:min(560px,52vw); z-index:2;
-  opacity:.9; pointer-events:none;
+.guzik svg{ width:19px; height:19px; flex:none; }
+.guzik--czerwony{
+  background:var(--czerwien); color:#fff; border-color:var(--czerwien);
+  box-shadow:0 4px 14px rgba(225,37,43,.28);
 }
-.hero__obwod .tor{ fill:none; stroke:rgba(255,255,255,.2); stroke-width:1.3; }
-.hero__obwod .plyn{
-  fill:none; stroke:var(--sygnal); stroke-width:2.1; stroke-linecap:round;
-  stroke-dasharray:15 57; filter:drop-shadow(0 0 4px rgba(230,57,70,.55));
-  animation:plynie 3.4s linear infinite;
-}
-.hero__obwod .plyn.o2{ animation-delay:-1.1s; }
-.hero__obwod .plyn.o3{ animation-delay:-2.2s; }
-@keyframes plynie{ to{ stroke-dashoffset:-216; } }  /* 3 x (15+57) */
-.hero__obwod .wezel{ fill:var(--grafit); stroke:rgba(255,255,255,.34); stroke-width:1.3; }
-.hero__obwod .ikona{ fill:none; stroke:rgba(255,255,255,.72); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
-
-/* pasek techniczny pod hero */
-.pasek{ border-top:1px solid var(--stal); background:var(--grafit-2); }
-.pasek__rzad{ display:grid; grid-template-columns:repeat(4,1fr); }
-.pasek__poz{ padding:26px 22px; border-right:1px solid var(--stal); }
-.pasek__poz:last-child{ border-right:0; }
-.pasek__poz .mono{ color:var(--mgla); display:block; margin-bottom:7px; font-size:11px; }
-.pasek__poz b{ font-size:19px; font-weight:700; letter-spacing:-.02em; }
-.pasek__poz b i{ font-style:normal; color:var(--sygnal); }
+.guzik--czerwony:hover{ background:var(--czerwien-2); border-color:var(--czerwien-2); transform:translateY(-2px); box-shadow:0 8px 22px rgba(225,37,43,.34); }
+.guzik--obrys{ background:#fff; color:var(--granat); border-color:var(--kreska); }
+.guzik--obrys:hover{ border-color:var(--granat); }
+.guzik--bialy{ background:#fff; color:var(--granat); border-color:#fff; }
+.guzik--bialy:hover{ transform:translateY(-2px); }
 
 /* ==========================================================================
-   4. SEKCJE JASNE
+   3. HERO
    ========================================================================== */
-.jasna{ background:var(--papier); color:var(--atrament); position:relative; }
-.sekcja{ padding:clamp(72px,9vw,124px) 0; }
-.naglowek{ max-width:62ch; margin-bottom:clamp(38px,5vw,58px); }
-.naglowek p{ margin-top:16px; }
-
-/* ---------- kalkulator ---------- */
-.kalk{
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
-  border:1px solid var(--kreska); background:#fff;
+.hero{
+  background:linear-gradient(170deg, var(--blekit-2) 0%, var(--blekit) 42%, #fff 100%);
+  padding:clamp(44px,5.5vw,76px) 0 clamp(48px,6vw,84px);
+  overflow:hidden;
 }
-.kalk__panel{ padding:clamp(26px,3.4vw,44px); }
-.kalk__panel--wynik{
-  background:var(--grafit); color:#fff; border-left:1px solid var(--kreska);
-  position:relative; overflow:hidden;
-}
+.hero__rzad{ display:grid; grid-template-columns:minmax(0,1.06fr) minmax(0,1fr); gap:clamp(30px,5vw,64px); align-items:center; }
+.hero h1 em{ font-style:normal; color:var(--czerwien); }
+.hero__lead{ font-size:18.5px; color:var(--tekst-2); margin:20px 0 0; max-width:52ch; }
 
-.pole{ margin-bottom:28px; }
-.pole__gora{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; gap:12px; }
-.pole__nazwa{ font-weight:600; font-size:15.5px; }
-.pole__wartosc{
-  font-family:'IBM Plex Mono',monospace; font-size:16px; font-weight:500;
-  color:var(--rdza); font-variant-numeric:tabular-nums;
+.zalety{ list-style:none; margin:28px 0 0; padding:0; }
+.zalety li{ position:relative; padding-left:38px; margin-bottom:15px; font-size:16.5px; }
+.zalety li b{ color:var(--granat); }
+.zalety li::before{
+  content:''; position:absolute; left:4px; top:7px; width:15px; height:8px;
+  border-left:3px solid var(--zielen); border-bottom:3px solid var(--zielen);
+  transform:rotate(-45deg); border-radius:1px;
 }
 
-input[type=range]{
-  -webkit-appearance:none; appearance:none; width:100%; height:3px;
-  background:var(--kreska); outline:none; margin:12px 0 6px;
-}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none; width:22px; height:22px; background:var(--pomarancz);
-  border:3px solid #fff; box-shadow:0 0 0 1px var(--pomarancz); cursor:pointer;
-}
-input[type=range]::-moz-range-thumb{
-  width:16px; height:16px; background:var(--pomarancz); border:3px solid #fff;
-  box-shadow:0 0 0 1px var(--pomarancz); cursor:pointer; border-radius:50%;
-}
-.skala{ display:flex; justify-content:space-between; color:var(--szary); }
+.hero__akcje{ display:flex; gap:14px; flex-wrap:wrap; margin-top:32px; }
+.hero__pod{ margin:20px 0 0; font-size:15px; color:var(--tekst-2); }
+.hero__pod b{ color:var(--granat); }
 
-.wybor{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
-.wybor label{
-  border:1px solid var(--kreska); padding:13px 14px; cursor:pointer;
-  font-size:14.5px; font-weight:500; transition:.18s var(--tempo);
-  display:flex; align-items:center; gap:9px; background:#fff;
+.hero__foto{ position:relative; }
+.hero__foto img{ width:100%; border-radius:10px; box-shadow:var(--cien-mocny); }
+.hero__plakietka{
+  position:absolute; left:-18px; bottom:-18px; background:#fff; border-radius:8px;
+  padding:16px 20px; box-shadow:var(--cien-mocny); display:flex; align-items:center; gap:14px;
 }
-.wybor input{ position:absolute; opacity:0; pointer-events:none; }
-.wybor label::before{
-  content:''; width:9px; height:9px; border:1px solid var(--kreska); flex:none;
-  transition:.18s;
-}
-.wybor label:hover{ border-color:var(--pomarancz); }
-.wybor input:checked + span{ font-weight:700; }
-.wybor label:has(input:checked){ border-color:var(--pomarancz); background:#FDEFF1; }
-.wybor label:has(input:checked)::before{ background:var(--pomarancz); border-color:var(--pomarancz); }
+.hero__plakietka b{ display:block; font-size:26px; color:var(--granat); letter-spacing:-.03em; line-height:1; }
+.hero__plakietka span{ font-size:13.5px; color:var(--tekst-2); }
+.hero__plakietka svg{ width:34px; height:34px; color:var(--czerwien); flex:none; }
 
-/* „w wycenie dostajesz" — domyka lewą kolumnę, żeby nie było dziury pod polami */
-.wchodzi{ margin-top:34px; padding-top:24px; border-top:1px solid var(--kreska); }
-.wchodzi .mono{ color:var(--rdza); display:block; margin-bottom:14px; }
-.wchodzi ul{ list-style:none; margin:0; padding:0; }
-.wchodzi li{
-  position:relative; padding-left:26px; margin-bottom:10px;
-  font-size:14.8px; color:var(--szary);
-}
-.wchodzi li::before{
-  content:''; position:absolute; left:0; top:8px;
-  width:12px; height:6px; border-left:2px solid var(--pomarancz); border-bottom:2px solid var(--pomarancz);
-  transform:rotate(-45deg);
-}
+/* ==========================================================================
+   4. PASEK FAKTÓW
+   ========================================================================== */
+.fakty-pasek{ border-top:1px solid var(--kreska); border-bottom:1px solid var(--kreska); background:#fff; }
+.fakty-pasek__rzad{ display:grid; grid-template-columns:repeat(4,1fr); }
+.fakt{ padding:26px 24px; border-right:1px solid var(--kreska); }
+.fakt:last-child{ border-right:0; }
+.fakt b{ display:block; font-size:25px; color:var(--granat); font-weight:800; letter-spacing:-.03em; line-height:1.15; }
+.fakt b i{ font-style:normal; color:var(--czerwien); }
+.fakt span{ font-size:14px; color:var(--tekst-2); display:block; margin-top:5px; }
 
-/* wynik */
-.wynik__lista{ list-style:none; margin:0; padding:0; }
-.wynik__poz{
-  display:flex; justify-content:space-between; align-items:baseline; gap:16px;
-  padding:17px 0; border-bottom:1px solid var(--stal);
+/* ==========================================================================
+   5. KARTY USŁUG
+   ========================================================================== */
+.karty{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.karta{
+  background:#fff; border:1px solid var(--kreska); border-radius:10px;
+  padding:30px 28px 28px; transition:.25s var(--tempo);
 }
-.wynik__poz:last-child{ border-bottom:0; }
-.wynik__etykieta{ color:var(--mgla); font-size:14.5px; max-width:22ch; }
-.wynik__liczba{
-  font-family:'IBM Plex Mono',monospace; font-size:clamp(22px,2.6vw,30px);
-  font-weight:500; font-variant-numeric:tabular-nums; letter-spacing:-.02em;
-  white-space:nowrap;
-}
-.wynik__liczba span{ font-size:14px; color:var(--mgla); margin-left:5px; letter-spacing:.06em; }
-.wynik__poz--mocny .wynik__liczba{ color:var(--sygnal); }
-
-.wynik__stopka{ margin-top:26px; padding-top:22px; border-top:1px solid var(--stal); }
-.zastrzezenie{
-  font-family:'IBM Plex Mono',monospace; font-size:11.5px; line-height:1.75;
-  color:var(--mgla); letter-spacing:.02em; text-transform:none;
-}
-.podpowiedz{
-  margin-top:18px; padding:15px 17px; border-left:2px solid var(--sygnal);
-  background:rgba(230,57,70,.07); font-size:14.5px; color:rgba(255,255,255,.88);
+.karta:hover{ transform:translateY(-3px); box-shadow:var(--cien); border-color:#C9D6E8; }
+.karta__ikona{ width:48px; height:48px; margin-bottom:20px; }
+.karta__ikona *{ fill:none; stroke:var(--czerwien); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.karta h3{ margin-bottom:12px; }
+.karta p{ font-size:15.5px; color:var(--tekst-2); margin:0 0 14px; }
+.karta ul{ list-style:none; margin:0; padding:0; }
+.karta li{ position:relative; padding-left:22px; font-size:14.5px; color:var(--tekst-2); margin-bottom:7px; }
+.karta li::before{
+  content:''; position:absolute; left:0; top:8px; width:11px; height:6px;
+  border-left:2px solid var(--zielen); border-bottom:2px solid var(--zielen); transform:rotate(-45deg);
 }
 
-/* formularz oddzwonienia */
-.oddzwon{ display:flex; gap:9px; margin-top:22px; flex-wrap:wrap; }
-.oddzwon input{
-  flex:1 1 190px; min-width:0; padding:15px 16px; font:inherit; font-size:16px;
-  background:var(--grafit-2); border:1px solid var(--stal-2); color:#fff;
+/* ---------- wyróżniona usługa główna ---------- */
+.glowna{
+  background:var(--granat); color:#fff; border-radius:12px; overflow:hidden;
+  display:grid; grid-template-columns:minmax(0,1.08fr) minmax(0,1fr); align-items:center;
 }
-.oddzwon input::placeholder{ color:#6C7791; }
-.oddzwon input:focus{ outline:none; border-color:var(--sygnal); }
-.oddzwon button{ flex:0 0 auto; }
-.oddzwon__info{ margin-top:12px; font-size:13.5px; color:var(--mgla); }
+.glowna__tresc{ padding:clamp(32px,4vw,56px); }
+.glowna h2{ color:#fff; margin-bottom:18px; }
+.glowna .nad{ color:#FF8A8F; }
+.glowna p{ color:rgba(255,255,255,.82); font-size:16.5px; max-width:56ch; }
+.glowna__lista{ list-style:none; margin:22px 0 0; padding:0; columns:2; column-gap:30px; }
+.glowna__lista li{ position:relative; padding-left:24px; margin-bottom:10px; font-size:15px; color:rgba(255,255,255,.88); break-inside:avoid; }
+.glowna__lista li::before{
+  content:''; position:absolute; left:0; top:8px; width:11px; height:6px;
+  border-left:2px solid var(--czerwien); border-bottom:2px solid var(--czerwien); transform:rotate(-45deg);
+}
+.glowna__foto{ align-self:stretch; }
+.glowna__foto img{ width:100%; height:100%; object-fit:cover; min-height:320px; }
 
-/* ---------- schemat instalacji ---------- */
-.schemat__pulpit{
-  display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-  margin-bottom:34px;
+/* ==========================================================================
+   6. MAPA TRAS
+   ========================================================================== */
+.trasy{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,4vw,56px); align-items:center; }
+.trasy__mapa{ background:#fff; border:1px solid var(--kreska); border-radius:12px; padding:clamp(14px,2vw,26px); box-shadow:var(--cien); }
+.europa{ width:100%; height:auto; display:block; }
+.europa .morze{ fill:#EEF4FB; }
+.europa .obce{ fill:#E3EAF3; stroke:#D3DEEC; stroke-width:1.1; }
+.europa .obsluga{ fill:#C8DBF0; stroke:#9FBEDF; stroke-width:1.2; transition:fill .3s var(--tempo); }
+.europa .obsluga.zywy{ fill:#9DC2E8; }
+.europa .baza-kraj{ fill:var(--granat); stroke:var(--czerwien); stroke-width:1.8; }
+.europa .kurs{
+  fill:none; stroke:var(--czerwien); stroke-width:3; stroke-linecap:round;
+  stroke-dasharray:13 40; animation:jedzie 2.6s linear infinite;
 }
-.przelacznik{ display:inline-flex; border:1px solid var(--stal-2); }
-.przelacznik button{
-  background:none; border:0; color:var(--mgla); font:inherit; font-size:14px; font-weight:600;
-  padding:11px 22px; cursor:pointer; transition:.2s var(--tempo);
-  display:inline-flex; align-items:center; gap:8px;
-}
-.przelacznik button.wybrany{ background:var(--sygnal); color:#101728; }
-.przelacznik button svg{ width:15px; height:15px; }
+@keyframes jedzie{ to{ stroke-dashoffset:-106; } }
+.europa .kurs-tor{ fill:none; stroke:#B9CDE4; stroke-width:1.6; }
+.europa .cel{ fill:#fff; stroke:var(--czerwien); stroke-width:2.6; }
+.europa .start{ fill:var(--czerwien); }
+.europa text{ font-family:'Archivo',sans-serif; font-size:17px; font-weight:600; fill:var(--granat); }
+.europa text.start-opis{ font-size:19px; font-weight:800; }
 
-.schemat__plansza{
-  border:1px solid var(--stal); background:var(--grafit-2);
-  padding:clamp(14px,2.4vw,30px); overflow-x:auto;
+.kraje{ list-style:none; margin:0; padding:0; }
+.kraje li{
+  display:grid; grid-template-columns:52px 1fr auto; gap:16px; align-items:center;
+  padding:16px 14px; border-radius:8px; transition:background .2s;
 }
-.schemat__svg{ width:100%; min-width:640px; height:auto; display:block; }
-.schemat__svg .kadl{ fill:none; stroke:var(--stal-2); stroke-width:1.5; }
-.schemat__svg .obudowa{ fill:var(--grafit); stroke:var(--stal-2); stroke-width:1.5; }
-.schemat__svg .rys{ fill:none; stroke:#B4BDD0; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
-.schemat__svg .kabel{ fill:none; stroke:#33405E; stroke-width:2; }
-.schemat__svg .iskra-tor{
-  fill:none; stroke:var(--sygnal); stroke-width:2.6; stroke-linecap:round;
-  stroke-dasharray:15 57; filter:drop-shadow(0 0 6px rgba(230,57,70,.55));
-  opacity:0; transition:opacity .4s;
+.kraje li:hover{ background:var(--blekit); }
+.kraje .kod{
+  font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; letter-spacing:.1em;
+  color:var(--czerwien); background:#FDECEC; border-radius:5px; padding:6px 0; text-align:center;
 }
-.schemat__svg .iskra-tor.gra{ opacity:1; animation:plynie2 2.6s linear infinite; }
-.schemat__svg .iskra-tor.wstecz.gra{ animation:plynie2-wstecz 2.6s linear infinite; }
-@keyframes plynie2{ to{ stroke-dashoffset:-216; } }
-@keyframes plynie2-wstecz{ to{ stroke-dashoffset:216; } }
-.schemat__svg text{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.09em; fill:var(--mgla); text-transform:uppercase; }
-.schemat__svg text.wart{ fill:var(--sygnal); font-size:13px; letter-spacing:.02em; }
-.schemat__svg .slonce{ stroke:#E8A11F; }
-.schemat__svg .usypia{ opacity:.28; transition:opacity .45s; }
+.kraje b{ color:var(--granat); font-size:17px; font-weight:700; display:block; }
+.kraje p{ margin:3px 0 0; font-size:14.5px; color:var(--tekst-2); }
+.kraje .miasta{ font-size:13.5px; color:var(--tekst-2); text-align:right; white-space:nowrap; }
 
-.schemat__opis{ margin-top:22px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--stal); border:1px solid var(--stal); }
-.schemat__opis div{ background:var(--grafit-2); padding:20px 22px; }
-.schemat__opis .mono{ color:var(--sygnal); display:block; margin-bottom:8px; }
-.schemat__opis p{ margin:0; font-size:14.5px; color:var(--mgla); }
-
-/* ---------- zakres usług ---------- */
-.zakres{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--kreska); border:1px solid var(--kreska); }
-.usluga{
-  background:#fff; padding:30px 26px 28px; position:relative;
-  transition:background .25s var(--tempo);
-}
-.usluga:hover{ background:#F8F9FC; }
-.usluga__nr{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:#9AA2B4; letter-spacing:.14em; }
-.usluga__ikona{ width:60px; height:60px; margin:16px 0 20px; display:block; }
-.usluga__ikona *{
-  fill:none; stroke:var(--pomarancz); stroke-width:2.1;
-  stroke-linecap:round; stroke-linejoin:round;
-}
-.usluga__ikona .wypelnij{ fill:var(--pomarancz); stroke:none; }
-.usluga h3{ margin-bottom:10px; }
-.usluga p{ font-size:14.8px; color:var(--szary); margin:0; line-height:1.62; }
-
-/* ---------- realizacje ---------- */
-.galeria{ display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
+/* ==========================================================================
+   7. GALERIA FLOTY
+   ========================================================================== */
+.galeria{ display:grid; grid-template-columns:repeat(12,1fr); gap:16px; }
 .kafel{
-  position:relative; overflow:hidden; background:var(--papier-2);
-  cursor:zoom-in; border:0; padding:0; font:inherit; text-align:left; display:block;
+  position:relative; overflow:hidden; border-radius:10px; background:var(--blekit-2);
+  cursor:zoom-in; border:0; padding:0; font:inherit; display:block;
 }
-.kafel img{ width:100%; height:100%; object-fit:cover; transition:transform .7s var(--tempo); }
-.kafel:hover img{ transform:scale(1.045); }
+.kafel img{ width:100%; height:100%; object-fit:cover; transition:transform .65s var(--tempo); }
+.kafel:hover img{ transform:scale(1.04); }
 .kafel__opis{
-  position:absolute; left:0; right:0; bottom:0; padding:34px 18px 16px;
-  background:linear-gradient(180deg,transparent,rgba(16,23,40,.88));
-  color:#fff; display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+  position:absolute; left:0; right:0; bottom:0; padding:30px 16px 14px;
+  background:linear-gradient(180deg,transparent,rgba(15,29,66,.86));
+  color:#fff; font-size:14.5px; font-weight:600; text-align:left;
 }
-.kafel__opis span{ font-size:14.5px; font-weight:600; line-height:1.3; }
-.kafel__opis .mono{ color:var(--sygnal); font-size:11px; flex:none; }
 .k-duzy{ grid-column:span 6; aspect-ratio:4/3; }
 .k-sredni{ grid-column:span 3; aspect-ratio:3/4; }
 .k-szeroki{ grid-column:span 6; aspect-ratio:16/10; }
 .k-maly{ grid-column:span 3; aspect-ratio:1/1; }
 
-/* powiększenie */
 .lupa{
-  position:fixed; inset:0; z-index:150; background:rgba(8,10,7,.95);
+  position:fixed; inset:0; z-index:150; background:rgba(15,29,66,.93);
   display:none; align-items:center; justify-content:center; padding:26px;
 }
-.lupa.widoczna{ display:flex; animation:wejdz .3s var(--tempo); }
-@keyframes wejdz{ from{opacity:0} }
-.lupa img{ max-width:min(1100px,94vw); max-height:86vh; object-fit:contain; }
-.lupa__podpis{ position:absolute; bottom:22px; left:0; right:0; text-align:center; color:var(--mgla); }
+.lupa.widoczna{ display:flex; animation:wejdz .28s var(--tempo); }
+@keyframes wejdz{ from{ opacity:0; } }
+.lupa img{ max-width:min(1100px,94vw); max-height:84vh; object-fit:contain; border-radius:8px; }
+.lupa__podpis{ position:absolute; bottom:22px; left:0; right:0; text-align:center; color:rgba(255,255,255,.8); font-size:14px; }
 .lupa__zamknij{
-  position:absolute; top:20px; right:24px; background:none; border:1px solid var(--stal-2);
-  color:#fff; width:44px; height:44px; cursor:pointer; font-size:22px; line-height:1;
+  position:absolute; top:20px; right:24px; background:rgba(255,255,255,.12); border:0;
+  color:#fff; width:44px; height:44px; border-radius:6px; cursor:pointer; font-size:24px; line-height:1;
 }
-.lupa__zamknij:hover{ border-color:var(--sygnal); color:var(--sygnal); }
+.lupa__zamknij:hover{ background:var(--czerwien); }
 
-/* ---------- proces ---------- */
-.kroki{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--kreska); border:1px solid var(--kreska); }
-.krok{ background:#fff; padding:30px 26px; position:relative; }
+/* ==========================================================================
+   8. PROCES
+   ========================================================================== */
+.kroki{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; position:relative; }
+.kroki::before{
+  content:''; position:absolute; left:8%; right:8%; top:27px; height:2px;
+  background:repeating-linear-gradient(90deg,var(--kreska) 0 9px,transparent 9px 18px);
+}
+.krok{ text-align:center; position:relative; }
 .krok__nr{
-  font-family:'IBM Plex Mono',monospace; font-size:34px; font-weight:400;
-  color:var(--kreska); letter-spacing:-.03em; line-height:1; margin-bottom:22px; display:block;
-  transition:color .3s;
+  width:54px; height:54px; margin:0 auto 20px; border-radius:50%;
+  background:#fff; border:2px solid var(--czerwien); color:var(--czerwien);
+  display:grid; place-items:center; font-weight:800; font-size:19px;
+  position:relative; z-index:2;
 }
-.krok:hover .krok__nr{ color:var(--pomarancz); }
-.krok h3{ margin-bottom:11px; }
-.krok p{ font-size:14.8px; color:var(--szary); margin:0; line-height:1.62; }
+.krok h3{ margin-bottom:9px; }
+.krok p{ font-size:15px; color:var(--tekst-2); margin:0; }
 
-/* ---------- opinie ---------- */
-.opinie-gora{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; }
-.ocena{ display:flex; align-items:center; gap:16px; }
-.ocena__cyfra{ font-size:56px; font-weight:800; letter-spacing:-.04em; line-height:1; }
-.gwiazdki{ display:flex; gap:3px; }
-.gwiazdki svg{ width:17px; height:17px; fill:#E8B21E; }
+/* ==========================================================================
+   9. OPINIE
+   ========================================================================== */
+.opinie-gora{ display:flex; justify-content:space-between; align-items:flex-end; gap:26px; flex-wrap:wrap; margin-bottom:34px; }
+.ocena{ display:flex; align-items:center; gap:14px; background:#fff; border:1px solid var(--kreska); border-radius:9px; padding:14px 20px; }
+.ocena__cyfra{ font-size:34px; font-weight:800; color:var(--granat); letter-spacing:-.03em; line-height:1; }
+.gwiazdki{ display:flex; gap:2px; }
+.gwiazdki svg{ width:17px; height:17px; fill:#F5A623; }
 
-.opinie{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--kreska); border:1px solid var(--kreska); margin-top:36px; }
-.opinia{ background:#fff; padding:32px 28px; display:flex; flex-direction:column; }
-.opinia blockquote{ margin:0 0 22px; font-size:16.5px; line-height:1.65; }
-.opinia blockquote::before{ content:'\201E'; color:var(--pomarancz); font-size:34px; line-height:0; vertical-align:-10px; margin-right:2px; }
+.opinie{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.opinia{ background:#fff; border:1px solid var(--kreska); border-radius:10px; padding:28px 26px; display:flex; flex-direction:column; }
+.opinia blockquote{ margin:0 0 20px; font-size:16px; color:var(--tekst); line-height:1.6; }
 .opinia footer{ margin-top:auto; display:flex; align-items:center; gap:12px; }
-.opinia__inicjal{
-  width:38px; height:38px; flex:none; background:var(--pomarancz); color:#fff;
-  display:grid; place-items:center; font-weight:700; font-size:15px;
-}
-.opinia__kto{ font-weight:600; font-size:15px; }
-.opinia__kiedy{ font-size:13px; color:var(--szary); }
+.opinia__inicjal{ width:38px; height:38px; border-radius:50%; background:var(--blekit-2); color:var(--granat); display:grid; place-items:center; font-weight:700; font-size:15px; }
+.opinia__kto{ font-weight:700; color:var(--granat); font-size:15px; }
+.opinia__kiedy{ font-size:13px; color:var(--tekst-2); }
 
-/* ---------- kontakt ---------- */
-.kontakt{ display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(30px,5vw,70px); align-items:start; }
+/* ==========================================================================
+   10. KONTAKT I FORMULARZ
+   ========================================================================== */
+.kontakt{
+  background:linear-gradient(160deg,var(--granat) 0%,var(--granat-3) 100%);
+  border-radius:14px; padding:clamp(32px,4.5vw,58px);
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.86fr); gap:clamp(28px,4vw,54px); align-items:center;
+}
+.kontakt h2{ color:#fff; }
+.kontakt .nad{ color:#FF8A8F; }
+.kontakt p{ color:rgba(255,255,255,.8); }
 .wielki-tel{
-  display:inline-flex; align-items:center; gap:16px; text-decoration:none; color:#fff;
-  font-size:clamp(28px,4.4vw,46px); font-weight:800; letter-spacing:-.03em;
-  margin:8px 0 4px; transition:color .2s;
+  display:inline-flex; align-items:center; gap:14px; text-decoration:none; color:#fff;
+  font-size:clamp(28px,3.6vw,40px); font-weight:800; letter-spacing:-.03em; margin:6px 0 10px;
 }
-.wielki-tel:hover{ color:var(--sygnal); }
-.wielki-tel svg{ width:.72em; height:.72em; flex:none; color:var(--sygnal); }
+.wielki-tel svg{ width:.7em; height:.7em; color:var(--czerwien); flex:none; }
+.wielki-tel:hover{ color:#FFD9DB; }
 
-.dane{ list-style:none; margin:36px 0 0; padding:0; border-top:1px solid var(--stal); }
-.dane li{ display:flex; gap:20px; padding:17px 0; border-bottom:1px solid var(--stal); align-items:baseline; }
-.dane .mono{ color:var(--mgla); flex:0 0 130px; font-size:11px; }
-.dane b{ font-weight:600; font-size:16px; }
-.dane a{ text-decoration:none; border-bottom:1px solid var(--stal-2); }
-.dane a:hover{ border-color:var(--sygnal); color:var(--sygnal); }
+.form{ background:#fff; border-radius:10px; padding:clamp(24px,3vw,34px); box-shadow:var(--cien-mocny); }
+.form h3{ margin-bottom:6px; }
+.form__pod{ font-size:14.5px; color:var(--tekst-2); margin-bottom:20px; }
+.form label{ display:block; margin-bottom:14px; }
+.form span{ display:block; font-size:13.5px; font-weight:600; color:var(--granat); margin-bottom:6px; }
+.form input, .form select{
+  width:100%; padding:13px 14px; font:inherit; font-size:16px;
+  border:1px solid var(--kreska); border-radius:6px; background:#fff; color:var(--tekst);
+}
+.form input:focus, .form select:focus{ outline:none; border-color:var(--czerwien); box-shadow:0 0 0 3px rgba(225,37,43,.12); }
+.form .guzik{ width:100%; margin-top:6px; }
+.form__info{ margin:14px 0 0; font-size:13.5px; color:var(--tekst-2); }
 
-.mapa{ border:1px solid var(--stal); filter:grayscale(1) contrast(.92) brightness(.78); transition:filter .4s; }
-.mapa:hover{ filter:grayscale(.1) contrast(1) brightness(.95); }
-.mapa iframe{ display:block; width:100%; height:clamp(320px,44vh,470px); border:0; background:var(--grafit-2); }
-
-/* ---------- stopka ---------- */
-.stopka{ background:var(--grafit-2); border-top:1px solid var(--stal); padding:54px 0 30px; color:var(--mgla); }
-.stopka__rzad{ display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:36px; padding-bottom:38px; }
-.stopka h4{ font-size:12px; font-family:'IBM Plex Mono',monospace; letter-spacing:.16em; text-transform:uppercase; color:#fff; margin-bottom:16px; font-weight:500; }
+/* ==========================================================================
+   11. STOPKA
+   ========================================================================== */
+.stopka{ background:var(--granat-3); color:rgba(255,255,255,.72); padding:54px 0 28px; margin-top:clamp(56px,7vw,92px); }
+.stopka__rzad{ display:grid; grid-template-columns:1.7fr 1fr 1fr; gap:38px; padding-bottom:34px; }
+.stopka h4{ color:#fff; font-size:12px; font-family:'IBM Plex Mono',monospace; letter-spacing:.14em; text-transform:uppercase; margin-bottom:16px; font-weight:500; }
 .stopka ul{ list-style:none; margin:0; padding:0; }
 .stopka li{ margin-bottom:9px; font-size:15px; }
 .stopka a{ text-decoration:none; }
-.stopka a:hover{ color:var(--sygnal); }
-.stopka__dol{
-  border-top:1px solid var(--stal); padding-top:22px;
-  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:13px;
-}
+.stopka a:hover{ color:#fff; }
+.stopka__znak{ background:#fff; border-radius:8px; padding:12px 16px; display:inline-block; }
+.stopka__znak img{ height:38px; }
+.stopka__dol{ border-top:1px solid rgba(255,255,255,.12); padding-top:20px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:13.5px; }
 
-/* pasek telefonu na telefonie */
 .pasek-tel{
   position:fixed; left:0; right:0; bottom:0; z-index:90; display:none;
-  background:var(--sygnal); color:#101728; text-decoration:none;
+  background:var(--czerwien); color:#fff; text-decoration:none;
   padding:15px; text-align:center; font-weight:800; font-size:17px;
-  border-top:1px solid rgba(0,0,0,.15);
 }
 
-/* ---------- wejścia w kadr ---------- */
-/* Siatki wjeżdżają w całości, a nie kafel po kaflu — inaczej w połowie
-   przewijania widać samą szarą płytę tła siatki zamiast kart. */
+/* ==========================================================================
+   12. WEJŚCIA W KADR
+   ========================================================================== */
+.wjazd{ opacity:0; transform:translateY(16px); }
+.wjazd.widac{ opacity:1; transform:none; transition:opacity .6s var(--tempo), transform .6s var(--tempo); }
 .siatka-wjazd > *{ opacity:0; transform:translateY(16px); }
 .siatka-wjazd.widac > *{
   opacity:1; transform:none;
-  transition:opacity .55s var(--tempo), transform .55s var(--tempo);
-  transition-delay:calc(var(--i,0) * 55ms);
+  transition:opacity .5s var(--tempo), transform .5s var(--tempo);
+  transition-delay:calc(var(--i,0) * 60ms);
 }
-
-.wjazd{ opacity:0; transform:translateY(18px); }
-.wjazd.widac{ opacity:1; transform:none; transition:opacity .7s var(--tempo), transform .7s var(--tempo); }
-.wjazd.o1.widac{ transition-delay:.08s; }
-.wjazd.o2.widac{ transition-delay:.16s; }
-.wjazd.o3.widac{ transition-delay:.24s; }
 
 /* ==========================================================================
    RESPONSYWNOŚĆ
    ========================================================================== */
 @media (max-width:1080px){
-  .zakres{ grid-template-columns:repeat(2,1fr); }
-  .kroki{ grid-template-columns:repeat(2,1fr); }
-  .opinie{ grid-template-columns:1fr; }
-  .kalk{ grid-template-columns:1fr; }
-  .kalk__panel--wynik{ border-left:0; border-top:1px solid var(--kreska); }
+  .hero__rzad{ grid-template-columns:1fr; }
+  .hero__foto{ order:-1; }
+  .hero__plakietka{ left:14px; bottom:-14px; }
+  .karty{ grid-template-columns:repeat(2,1fr); }
+  .glowna{ grid-template-columns:1fr; }
+  .glowna__foto img{ min-height:260px; }
+  .trasy{ grid-template-columns:1fr; }
   .kontakt{ grid-template-columns:1fr; }
-  .hero__obwod{ display:none; }
+  .opinie{ grid-template-columns:1fr; }
+  .kroki{ grid-template-columns:repeat(2,1fr); row-gap:36px; }
+  .kroki::before{ display:none; }
   .stopka__rzad{ grid-template-columns:1fr 1fr; }
 }
 
-@media (max-width:820px){
-  body{ font-size:16px; padding-bottom:56px; }
+@media (max-width:860px){
+  body{ font-size:16px; padding-bottom:58px; }
   .menu{
-    position:fixed; inset:76px 0 auto 0; flex-direction:column; gap:0;
-    background:rgba(16,23,40,.985); backdrop-filter:blur(10px);
-    padding:14px 24px 26px; border-bottom:1px solid var(--stal);
-    transform:translateY(-130%); transition:transform .42s var(--tempo);
+    position:fixed; inset:78px 0 auto 0; flex-direction:column; gap:0;
+    background:#fff; padding:10px 24px 22px; border-bottom:1px solid var(--kreska);
+    box-shadow:0 18px 30px rgba(22,41,92,.1);
+    transform:translateY(-140%); transition:transform .4s var(--tempo);
   }
   .menu.otwarte{ transform:none; }
-  .menu li{ border-bottom:1px solid var(--stal); }
-  .menu a{ display:block; padding:17px 0; font-size:17px; }
+  .menu li{ border-bottom:1px solid var(--kreska); }
+  .menu a{ display:block; padding:16px 0; font-size:17px; }
   .burger{ display:block; }
-  .tel-nav{ display:none; }
+  .nawigacja__rzad .guzik{ display:none; }
   .pasek-tel{ display:block; }
-  .pasek__rzad{ grid-template-columns:1fr 1fr; }
-  .pasek__poz{ border-bottom:1px solid var(--stal); padding:20px 18px; }
-  .pasek__poz:nth-child(2n){ border-right:0; }
-  .schemat__opis{ grid-template-columns:1fr; }
-  .galeria{ gap:10px; }
+  .fakty-pasek__rzad{ grid-template-columns:1fr 1fr; }
+  .fakt{ border-bottom:1px solid var(--kreska); }
+  .fakt:nth-child(2n){ border-right:0; }
+  .galeria{ gap:12px; }
   .k-duzy,.k-szeroki{ grid-column:span 12; }
   .k-sredni,.k-maly{ grid-column:span 6; }
+  .glowna__lista{ columns:1; }
+  .kraje li{ grid-template-columns:48px 1fr; }
+  .kraje .miasta{ grid-column:2; text-align:left; white-space:normal; }
   .stopka__rzad{ grid-template-columns:1fr; gap:28px; }
-  .hero{ min-height:auto; padding-top:120px; }
-  .hero__tresc{ padding-bottom:64px; }
-
-  /* adres e-mail nie mieści się obok etykiety na wąskim ekranie */
-  .dane li{ flex-direction:column; gap:6px; align-items:flex-start; }
-  .dane .mono{ flex:none; }
-  .dane b{ font-size:15px; word-break:break-word; }
-  .pasek__poz b{ font-size:16px; }
+  .gorny__lewo{ gap:14px; font-size:12.5px; }
 }
 
 @media (max-width:520px){
-  .zakres{ grid-template-columns:1fr; }
+  .karty{ grid-template-columns:1fr; }
   .kroki{ grid-template-columns:1fr; }
-  .wybor{ grid-template-columns:1fr; }
-  .guzik{ width:100%; justify-content:center; }
+  .guzik{ width:100%; }
   .hero__akcje{ gap:10px; }
 }
 
@@ -617,249 +441,3 @@ input[type=range]::-moz-range-thumb{
   html{ scroll-behavior:auto; }
   .wjazd,.siatka-wjazd > *{ opacity:1; transform:none; }
 }
-
-/* ==========================================================================
-   DODATKI DLA KURIERA — status same-day, mapa promienia, tablica kierunków
-   ========================================================================== */
-
-/* ---------- pola kalkulatora obok siebie ---------- */
-.pole--waski .pole__wartosc{ font-size:15px; }
-
-/* ---------- wielki werdykt nad liczbami ---------- */
-.werdykt{
-  border:1px solid var(--stal); background:var(--grafit-2);
-  padding:20px 22px; margin-bottom:26px; position:relative; overflow:hidden;
-}
-.werdykt::before{
-  content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
-  background:var(--sygnal); transition:background .3s var(--tempo);
-}
-.werdykt.nie::before{ background:var(--stal-2); }
-.werdykt__mono{ color:var(--mgla); display:block; margin-bottom:9px; }
-.werdykt__tekst{
-  font-size:clamp(20px,2.5vw,27px); font-weight:800; letter-spacing:-.025em;
-  line-height:1.15; color:var(--sygnal); margin:0;
-}
-.werdykt.nie .werdykt__tekst{ color:#fff; }
-.werdykt__pod{ margin:9px 0 0; font-size:14.5px; color:var(--mgla); }
-
-/* pasek pokazujący, gdzie na skali 100 km leży trasa */
-.skala-100{ margin-top:16px; }
-.skala-100__tor{
-  position:relative; height:6px; background:var(--stal); overflow:hidden;
-}
-.skala-100__strefa{
-  position:absolute; left:0; top:0; bottom:0; width:33.33%;
-  background:rgba(230,57,70,.34);
-}
-.skala-100__znacznik{
-  position:absolute; top:-5px; width:2px; height:16px; background:#fff;
-  transition:left .35s var(--tempo);
-}
-.skala-100__opis{
-  display:flex; justify-content:space-between; margin-top:9px; color:var(--mgla);
-}
-
-/* ---------- mapa promienia ---------- */
-.mapa-pulpit{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:34px; }
-
-.plansza{
-  border:1px solid var(--stal); background:var(--grafit-2);
-  display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
-}
-.plansza__rysunek{ padding:clamp(16px,2.6vw,34px); border-right:1px solid var(--stal); }
-.plansza__opis{ padding:clamp(22px,3vw,36px); display:flex; flex-direction:column; }
-
-.polska{ width:100%; height:auto; display:block; }
-.polska .kraj{ fill:#1A2438; stroke:var(--stal-2); stroke-width:1.4; }
-.polska .siatka{ stroke:#1E2840; stroke-width:.8; }
-.polska .krag{
-  fill:rgba(230,57,70,.09); stroke:var(--sygnal); stroke-width:1.5;
-  stroke-dasharray:6 6; transition:opacity .45s;
-}
-.polska .krag-opis{ fill:var(--sygnal); }
-.polska .trasa{
-  fill:none; stroke:var(--sygnal); stroke-width:2.6; stroke-linecap:round;
-  stroke-dasharray:14 54; filter:drop-shadow(0 0 6px rgba(230,57,70,.5));
-  animation:jedzie 2.4s linear infinite;
-}
-@keyframes jedzie{ to{ stroke-dashoffset:-204; } }
-.polska .tor-szary{ fill:none; stroke:#33405E; stroke-width:1.6; }
-.polska .baza{ fill:var(--sygnal); }
-.polska .baza-obwod{ fill:none; stroke:var(--sygnal); stroke-width:1.4; opacity:.55; }
-.polska .punkt{ fill:#fff; stroke:var(--grafit); stroke-width:2; transition:.35s var(--tempo); }
-.polska text{
-  font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em;
-  fill:var(--mgla); text-transform:uppercase;
-}
-.polska text.mocny{ fill:#fff; font-size:13px; letter-spacing:.02em; text-transform:none; }
-.polska .warstwa{ opacity:0; transition:opacity .45s var(--tempo); pointer-events:none; }
-.polska .warstwa.gra{ opacity:1; }
-
-.plansza__opis h3{ margin-bottom:12px; }
-.plansza__opis p{ color:var(--mgla); font-size:15px; }
-.fakty{ list-style:none; margin:auto 0 0; padding:22px 0 0; border-top:1px solid var(--stal); }
-.fakty li{ display:flex; justify-content:space-between; gap:14px; padding:12px 0; border-bottom:1px solid var(--stal); align-items:baseline; }
-.fakty li:last-child{ border-bottom:0; }
-.fakty .mono{ color:var(--mgla); }
-.fakty b{ font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:15px; color:#fff; font-variant-numeric:tabular-nums; }
-.fakty b.akcent{ color:var(--sygnal); }
-
-/* ---------- tablica kierunków ---------- */
-.tablica{ border:1px solid var(--kreska); background:#fff; overflow-x:auto; }
-.tablica table{ width:100%; border-collapse:collapse; min-width:620px; }
-.tablica th{
-  font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em;
-  text-transform:uppercase; font-weight:500; color:var(--szary);
-  text-align:left; padding:16px 20px; border-bottom:1px solid var(--kreska); background:var(--papier-2);
-}
-.tablica td{ padding:17px 20px; border-bottom:1px solid var(--kreska); font-size:15.5px; }
-.tablica tr:last-child td{ border-bottom:0; }
-.tablica tr:hover td{ background:#F8F9FC; }
-.tablica td.dane{ font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; font-size:14.5px; }
-.tablica td b{ font-weight:700; }
-.tablica .flaga{
-  display:inline-block; width:22px; height:15px; margin-right:11px; vertical-align:-2px;
-  border:1px solid var(--kreska);
-}
-.znacznik{
-  display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px;
-  letter-spacing:.1em; text-transform:uppercase; color:var(--rdza);
-  border:1px solid var(--rdza); padding:3px 8px;
-}
-
-/* ---------- dwie kolumny w sekcji „co wozimy" ---------- */
-.zakres--3{ grid-template-columns:repeat(3,1fr); }
-
-/* ---------- linia doby ---------- */
-.doba{ margin-top:34px; }
-.doba__tor{ position:relative; height:1px; background:var(--kreska); margin:56px 0 0; }
-.doba__pkt{ position:absolute; top:-7px; width:13px; height:13px; background:var(--pomarancz); transform:translateX(-50%); }
-.doba__pkt span{
-  position:absolute; left:50%; transform:translateX(-50%); bottom:24px; white-space:nowrap;
-  font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.08em;
-  text-transform:uppercase; color:var(--szary);
-}
-.doba__pkt b{ position:absolute; left:50%; transform:translateX(-50%); top:22px; white-space:nowrap; font-size:14px; }
-
-@media (max-width:1080px){
-  .plansza{ grid-template-columns:1fr; }
-  .plansza__rysunek{ border-right:0; border-bottom:1px solid var(--stal); }
-  .zakres--3{ grid-template-columns:repeat(2,1fr); }
-}
-@media (max-width:520px){
-  .zakres--3{ grid-template-columns:1fr; }
-}
-
-/* tło hero jest rysunkiem SVG, nie zdjęciem — klient nie dał jeszcze fotek aut */
-.hero__tlo svg{ width:100%; height:100%; display:block; }
-
-/* ---------- wybór miast w sprawdzarce promienia ---------- */
-.wybierak{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:26px; }
-.wybierak__pole{ display:block; }
-.wybierak__pole .mono{ display:block; color:var(--mgla); margin-bottom:9px; }
-.wybierak select{
-  width:100%; padding:14px 40px 14px 15px; font:inherit; font-size:16px; font-weight:600;
-  background:var(--grafit-2); border:1px solid var(--stal-2); color:#fff;
-  border-radius:0; cursor:pointer;
-  -webkit-appearance:none; appearance:none;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' fill='none' stroke='%23FF6A2B' stroke-width='2'/></svg>");
-  background-repeat:no-repeat; background-position:right 15px center;
-}
-.wybierak select:focus{ outline:none; border-color:var(--sygnal); }
-.wybierak select option{ background:var(--grafit-2); color:#fff; }
-
-/* w sprawdzarce fakty nie są już przyklejone do dołu kolumny */
-.plansza__opis .fakty{ margin:26px 0 0; }
-.plansza__opis .guzik{ align-self:flex-start; }
-
-@media (max-width:520px){
-  .wybierak{ grid-template-columns:1fr; }
-}
-
-
-/* ==========================================================================
-   POLSKI EXPRESS 24 — logo, mapa Europy, karty usług
-   ========================================================================== */
-
-/* ---------- znak firmowy: logo klienta zamiast składanego tekstu ---------- */
-.logo{ display:block; line-height:0; }
-.logo img{ height:var(--logo,38px); width:auto; }
-.nawigacja .logo img{ height:34px; }
-.ladowanie .logo img{ height:clamp(48px,9vw,84px); margin:0 auto; }
-.stopka .logo img{ height:40px; }
-
-/* ---------- mapa Europy Północnej ---------- */
-.trasy{ display:grid; grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr); gap:clamp(26px,4vw,56px); align-items:start; }
-.trasy__mapa{ border:1px solid var(--stal); background:var(--grafit-2); padding:clamp(14px,2vw,26px); }
-.europa{ width:100%; height:auto; display:block; }
-.europa .morze{ fill:#0C1220; }
-.europa .obce{ fill:#182137; stroke:#232E4A; stroke-width:1.1; }
-.europa .obsluga{ fill:#233156; stroke:#3B4C78; stroke-width:1.2; transition:fill .4s var(--tempo); }
-.europa .obsluga.zywy{ fill:#2E4173; }
-.europa .baza-kraj{ fill:var(--granat); stroke:var(--sygnal); stroke-width:1.6; }
-.europa .kurs{
-  fill:none; stroke:var(--sygnal); stroke-width:2.2; stroke-linecap:round;
-  stroke-dasharray:12 50; filter:drop-shadow(0 0 5px rgba(230,57,70,.5));
-  animation:jedzie 2.6s linear infinite;
-}
-.europa .kurs-tor{ fill:none; stroke:#33405E; stroke-width:1.3; }
-.europa .cel{ fill:#fff; stroke:var(--grafit); stroke-width:2; }
-.europa .start{ fill:var(--sygnal); }
-.europa text{
-  font-family:'IBM Plex Mono',monospace; font-size:15px; letter-spacing:.02em;
-  fill:#C3CBDD;
-}
-.europa text.stolica{ fill:#fff; font-size:16px; font-weight:500; }
-
-/* lista krajów obok mapy */
-.kraje{ list-style:none; margin:0; padding:0; border-top:1px solid var(--stal); }
-.kraje li{ border-bottom:1px solid var(--stal); padding:18px 0; display:grid; grid-template-columns:44px 1fr auto; gap:16px; align-items:baseline; }
-.kraje .kod{ font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.12em; color:var(--sygnal); }
-.kraje b{ font-size:17px; font-weight:700; display:block; }
-.kraje p{ margin:5px 0 0; font-size:14.5px; color:var(--mgla); max-width:46ch; }
-.kraje .miasta{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--mgla); text-align:right; white-space:nowrap; }
-
-/* ---------- karta usługi z rozbudowanym tekstem ---------- */
-.uslugi{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--kreska); border:1px solid var(--kreska); }
-.usluga-duza{ background:#fff; padding:clamp(26px,3vw,40px); }
-.usluga-duza__gora{ display:flex; align-items:center; gap:16px; margin-bottom:20px; }
-.usluga-duza__nr{ font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.14em; color:var(--pomarancz); }
-.usluga-duza__ikona{ width:46px; height:46px; flex:none; }
-.usluga-duza__ikona *{ fill:none; stroke:var(--pomarancz); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-.usluga-duza h3{ margin-bottom:12px; font-size:clamp(20px,1.8vw,24px); }
-.usluga-duza p{ font-size:15.5px; color:var(--szary); line-height:1.66; margin-bottom:14px; }
-.usluga-duza p:last-child{ margin-bottom:0; }
-.usluga-duza .lista{ list-style:none; margin:16px 0 0; padding:0; }
-.usluga-duza .lista li{ position:relative; padding-left:24px; margin-bottom:9px; font-size:14.8px; color:var(--szary); }
-.usluga-duza .lista li::before{
-  content:''; position:absolute; left:0; top:8px; width:11px; height:6px;
-  border-left:2px solid var(--pomarancz); border-bottom:2px solid var(--pomarancz); transform:rotate(-45deg);
-}
-.usluga-duza--glowna{ grid-column:1 / -1; background:var(--grafit); color:#fff; }
-.usluga-duza--glowna h3{ font-size:clamp(24px,2.6vw,32px); }
-.usluga-duza--glowna p{ color:var(--mgla); font-size:16.5px; max-width:68ch; }
-.usluga-duza--glowna .usluga-duza__nr{ color:var(--sygnal); }
-.usluga-duza--glowna .usluga-duza__ikona *{ stroke:var(--sygnal); }
-.usluga-duza--glowna .lista li{ color:var(--mgla); }
-.usluga-duza--glowna .lista li::before{ border-color:var(--sygnal); }
-.usluga-duza--glowna .lista{ columns:2; column-gap:34px; }
-
-@media (max-width:1080px){
-  .trasy{ grid-template-columns:1fr; }
-  .uslugi{ grid-template-columns:1fr; }
-  .usluga-duza--glowna .lista{ columns:1; }
-}
-@media (max-width:820px){
-  .kraje li{ grid-template-columns:36px 1fr; }
-  .kraje .miasta{ grid-column:2; text-align:left; white-space:normal; }
-}
-
-/* mapa Polski: sąsiedzi w tle, Polska w granacie marki */
-.polska .obce{ fill:#161E32; stroke:#222C46; stroke-width:1.1; }
-.polska .kraj{ fill:var(--granat); stroke:#4A5C8C; stroke-width:1.5; }
-
-/* trasy na mapie Europy — wyraźniejsze niż domyślne */
-.europa .kurs{ stroke-width:3; stroke-dasharray:14 44; }
-.europa .kurs-tor{ stroke:#3B4868; stroke-width:1.6; }
-.europa .cel{ r:6; }
