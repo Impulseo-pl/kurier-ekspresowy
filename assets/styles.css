@@ -40,7 +40,7 @@ body{
   overflow-x:hidden;
 }
 
-img{ max-width:100%; display:block; }
+img{ max-width:100%; height:auto; display:block; }
 a{ color:inherit; }
 
 .wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--gut); position:relative; }
@@ -158,7 +158,7 @@ p{ margin:0 0 1em; }
 .hero__pod b{ color:var(--granat); }
 
 .hero__foto{ position:relative; }
-.hero__foto img{ width:100%; border-radius:10px; box-shadow:var(--cien-mocny); }
+.hero__foto img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px; box-shadow:var(--cien-mocny); }
 .hero__plakietka{
   position:absolute; left:-18px; bottom:-18px; background:#fff; border-radius:8px;
   padding:16px 20px; box-shadow:var(--cien-mocny); display:flex; align-items:center; gap:14px;
@@ -214,7 +214,7 @@ p{ margin:0 0 1em; }
   border-left:2px solid var(--czerwien); border-bottom:2px solid var(--czerwien); transform:rotate(-45deg);
 }
 .glowna__foto{ align-self:stretch; }
-.glowna__foto img{ width:100%; height:100%; object-fit:cover; min-height:320px; }
+.glowna__foto img{ width:100%; height:100%; min-height:320px; object-fit:cover; }
 
 /* ==========================================================================
    6. MAPA TRAS
