@@ -262,26 +262,17 @@
     var f = document.getElementById('oddzwon');
     if (!f) return;
 
+    // UWAGA: klient nie podał adresu e-mail. Do czasu jego podania formularz
+    // tylko potwierdza zgłoszenie i kieruje na telefon — nie wysyła nic donikąd.
     f.addEventListener('submit', function (e) {
       e.preventDefault();
-      var imie = f.imie.value.trim();
+      var imie = f.imie.value.trim().replace(/[<>]/g, '');
       var tel = f.telefon.value.trim();
       if (!imie || !tel) return;
 
-      var tresc =
-        'Dzień dobry,\n\n' +
-        'proszę o kontakt w sprawie kursu.\n\n' +
-        'Imię: ' + imie + '\n' +
-        'Telefon: ' + tel + '\n';
-
-      window.location.href =
-        'mailto:biuro@example.pl' +
-        '?subject=' + encodeURIComponent('Prośba o kontakt — kurs ekspresowy') +
-        '&body=' + encodeURIComponent(tresc);
-
       document.getElementById('oddzwon-info').innerHTML =
-        'Dziękujemy, ' + imie.replace(/[<>]/g, '') +
-        '. Oddzwaniamy najszybciej jak się da. Pilne? <a href="tel:+48500100200" style="color:var(--sygnal)">500 100 200</a>.';
+        'Dziękujemy, ' + imie + '. Oddzwonimy pod ' + tel.replace(/[<>]/g, '') +
+        '. Pilne? <a href="tel:+48690757344" style="color:var(--sygnal)">690 757 344</a>.';
       f.reset();
     });
   })();
@@ -323,7 +314,25 @@
   })();
 
   /* ----------------------------------------------------------------------
-     7. ROK W STOPCE
+     7. MAPA TRAS: wiersz listy podświetla kraj
+     ---------------------------------------------------------------------- */
+  (function trasy() {
+    var lista = document.querySelector('.kraje');
+    var mapa = document.querySelector('.europa');
+    if (!lista || !mapa) return;
+
+    lista.querySelectorAll('li').forEach(function (li) {
+      var kod = li.querySelector('.kod');
+      if (!kod) return;
+      var kraj = mapa.querySelector('[data-kraj="' + kod.textContent.trim().toLowerCase() + '"]');
+      if (!kraj) return;
+      li.addEventListener('mouseenter', function () { kraj.classList.add('zywy'); });
+      li.addEventListener('mouseleave', function () { kraj.classList.remove('zywy'); });
+    });
+  })();
+
+  /* ----------------------------------------------------------------------
+     8. ROK W STOPCE
      ---------------------------------------------------------------------- */
   (function rok() {
     var el = document.getElementById('rok');
