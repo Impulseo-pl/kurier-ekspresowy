@@ -858,3 +858,8 @@ input[type=range]::-moz-range-thumb{
 /* mapa Polski: sąsiedzi w tle, Polska w granacie marki */
 .polska .obce{ fill:#161E32; stroke:#222C46; stroke-width:1.1; }
 .polska .kraj{ fill:var(--granat); stroke:#4A5C8C; stroke-width:1.5; }
+
+/* trasy na mapie Europy — wyraźniejsze niż domyślne */
+.europa .kurs{ stroke-width:3; stroke-dasharray:14 44; }
+.europa .kurs-tor{ stroke:#3B4868; stroke-width:1.6; }
+.europa .cel{ r:6; }

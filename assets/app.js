@@ -126,25 +126,29 @@
     var PROMIEN = 100; // km — obietnica z oferty
 
     // [nazwa, długość geogr., szerokość geogr.]
+    // [mianownik, dopełniacz (do zdań „od… do…"), długość geogr., szerokość geogr.]
     var MIASTA = [
-      ['Warszawa', 21.01, 52.23], ['Kraków', 19.94, 50.06], ['Łódź', 19.46, 51.76],
-      ['Wrocław', 17.04, 51.11], ['Poznań', 16.93, 52.41], ['Gdańsk', 18.65, 54.35],
-      ['Gdynia', 18.53, 54.52], ['Szczecin', 14.55, 53.43], ['Bydgoszcz', 18.00, 53.12],
-      ['Toruń', 18.60, 53.01], ['Lublin', 22.57, 51.25], ['Białystok', 23.16, 53.13],
-      ['Katowice', 19.02, 50.26], ['Gliwice', 18.67, 50.29], ['Tychy', 18.99, 50.13],
-      ['Rybnik', 18.55, 50.10], ['Bielsko-Biała', 19.05, 49.82], ['Częstochowa', 19.12, 50.81],
-      ['Kielce', 20.63, 50.87], ['Radom', 21.15, 51.40], ['Rzeszów', 22.00, 50.04],
-      ['Tarnów', 20.99, 50.01], ['Nowy Sącz', 20.70, 49.62], ['Olsztyn', 20.49, 53.78],
-      ['Elbląg', 19.40, 54.16], ['Opole', 17.93, 50.67], ['Wałbrzych', 16.28, 50.77],
-      ['Legnica', 16.16, 51.21], ['Jelenia Góra', 15.73, 50.90], ['Zielona Góra', 15.51, 51.94],
-      ['Gorzów Wielkopolski', 15.24, 52.74], ['Koszalin', 16.19, 54.19], ['Słupsk', 17.03, 54.46],
-      ['Piła', 16.74, 53.15], ['Kalisz', 18.09, 51.76], ['Konin', 18.25, 52.22],
-      ['Włocławek', 19.07, 52.65], ['Płock', 19.71, 52.55], ['Grudziądz', 18.75, 53.48],
-      ['Ciechanów', 20.62, 52.88], ['Ostrołęka', 21.57, 53.09], ['Siedlce', 22.29, 52.17],
-      ['Zamość', 23.25, 50.72], ['Suwałki', 22.93, 54.10], ['Mielec', 21.42, 50.29],
-      ['Piotrków Trybunalski', 19.70, 51.41], ['Sieradz', 18.73, 51.60],
-      ['Skierniewice', 20.16, 51.96], ['Żyrardów', 20.44, 52.05], ['Sochaczew', 20.24, 52.23],
-      ['Pruszków', 20.81, 52.17], ['Jaworzno', 19.27, 50.20], ['Ostrowiec Świętokrzyski', 21.39, 50.93]
+      ['Warszawa','Warszawy',21.01,52.23], ['Kraków','Krakowa',19.94,50.06], ['Łódź','Łodzi',19.46,51.76],
+      ['Wrocław','Wrocławia',17.04,51.11], ['Poznań','Poznania',16.93,52.41], ['Gdańsk','Gdańska',18.65,54.35],
+      ['Gdynia','Gdyni',18.53,54.52], ['Szczecin','Szczecina',14.55,53.43], ['Bydgoszcz','Bydgoszczy',18.00,53.12],
+      ['Toruń','Torunia',18.60,53.01], ['Lublin','Lublina',22.57,51.25], ['Białystok','Białegostoku',23.16,53.13],
+      ['Katowice','Katowic',19.02,50.26], ['Gliwice','Gliwic',18.67,50.29], ['Tychy','Tychów',18.99,50.13],
+      ['Rybnik','Rybnika',18.55,50.10], ['Bielsko-Biała','Bielska-Białej',19.05,49.82],
+      ['Częstochowa','Częstochowy',19.12,50.81], ['Kielce','Kielc',20.63,50.87], ['Radom','Radomia',21.15,51.40],
+      ['Rzeszów','Rzeszowa',22.00,50.04], ['Tarnów','Tarnowa',20.99,50.01], ['Nowy Sącz','Nowego Sącza',20.70,49.62],
+      ['Olsztyn','Olsztyna',20.49,53.78], ['Elbląg','Elbląga',19.40,54.16], ['Opole','Opola',17.93,50.67],
+      ['Wałbrzych','Wałbrzycha',16.28,50.77], ['Legnica','Legnicy',16.16,51.21],
+      ['Jelenia Góra','Jeleniej Góry',15.73,50.90], ['Zielona Góra','Zielonej Góry',15.51,51.94],
+      ['Gorzów Wielkopolski','Gorzowa Wielkopolskiego',15.24,52.74], ['Koszalin','Koszalina',16.19,54.19],
+      ['Słupsk','Słupska',17.03,54.46], ['Piła','Piły',16.74,53.15], ['Kalisz','Kalisza',18.09,51.76],
+      ['Konin','Konina',18.25,52.22], ['Włocławek','Włocławka',19.07,52.65], ['Płock','Płocka',19.71,52.55],
+      ['Grudziądz','Grudziądza',18.75,53.48], ['Ciechanów','Ciechanowa',20.62,52.88],
+      ['Ostrołęka','Ostrołęki',21.57,53.09], ['Siedlce','Siedlec',22.29,52.17], ['Zamość','Zamościa',23.25,50.72],
+      ['Suwałki','Suwałk',22.93,54.10], ['Mielec','Mielca',21.42,50.29],
+      ['Piotrków Trybunalski','Piotrkowa Trybunalskiego',19.70,51.41], ['Sieradz','Sieradza',18.73,51.60],
+      ['Skierniewice','Skierniewic',20.16,51.96], ['Żyrardów','Żyrardowa',20.44,52.05],
+      ['Sochaczew','Sochaczewa',20.24,52.23], ['Pruszków','Pruszkowa',20.81,52.17],
+      ['Jaworzno','Jaworzna',19.27,50.20], ['Ostrowiec Świętokrzyski','Ostrowca Świętokrzyskiego',21.39,50.93]
     ].sort(function (a, b) { return a[0].localeCompare(b[0], 'pl'); });
 
     // mapa: te same wzory, którymi narysowany jest kontur Polski w SVG
@@ -153,9 +157,9 @@
 
     function odleglosc(a, b) {                       // haversine, kilometry
       var R = 6371, rad = Math.PI / 180;
-      var dLat = (b[2] - a[2]) * rad, dLon = (b[1] - a[1]) * rad;
+      var dLat = (b[3] - a[3]) * rad, dLon = (b[2] - a[2]) * rad;
       var s1 = Math.sin(dLat / 2), s2 = Math.sin(dLon / 2);
-      var h = s1 * s1 + Math.cos(a[2] * rad) * Math.cos(b[2] * rad) * s2 * s2;
+      var h = s1 * s1 + Math.cos(a[3] * rad) * Math.cos(b[3] * rad) * s2 * s2;
       return 2 * R * Math.asin(Math.sqrt(h));
     }
 
@@ -200,12 +204,12 @@
       var b = MIASTA[+selB.value];
       var km = Math.round(odleglosc(a, b));
 
-      var ax = mx(a[1]), ay = my(a[2]);
-      var bx = mx(b[1]), by = my(b[2]);
+      var ax = mx(a[2]), ay = my(a[3]);
+      var bx = mx(b[2]), by = my(b[3]);
 
       // promień w pikselach: w pionie stały, w poziomie zależny od szerokości geogr.
       var ry = PROMIEN / 111.32 * 90;
-      var rx = PROMIEN / (111.32 * Math.cos(a[2] * Math.PI / 180)) * 55;
+      var rx = PROMIEN / (111.32 * Math.cos(a[3] * Math.PI / 180)) * 55;
 
       krag.setAttribute('cx', ax.toFixed(1));
       krag.setAttribute('cy', ay.toFixed(1));
@@ -240,12 +244,12 @@
       } else if (km <= PROMIEN) {
         werdykt.classList.remove('nie');
         werdyktTxt.textContent = 'Mieści się w promieniu';
-        werdyktPod.textContent = 'Od ' + a[0] + ' do ' + b[0] + ' jest ' + km +
+        werdyktPod.textContent = 'Od ' + a[1] + ' do ' + b[1] + ' jest ' + km +
           ' km — mniej niż 100. Przesyłka jedzie tego samego dnia.';
       } else {
         werdykt.classList.add('nie');
         werdyktTxt.textContent = 'Poza promieniem — kurs dedykowany';
-        werdyktPod.textContent = 'Od ' + a[0] + ' do ' + b[0] + ' jest ' + km +
+        werdyktPod.textContent = 'Od ' + a[1] + ' do ' + b[1] + ' jest ' + km +
           ' km. Jedziemy i tam, osobnym autem — termin ustala dyspozytor przy zleceniu.';
       }
     }
