@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  ====== DEMO — DO PODMIANY PO PODANIU DANYCH KLIENTA ======
+  1. Nazwa firmy: znaki .znak__glowny "KURIER" / .znak__drugi "EKSPRESOWY" (loader, nawigacja, stopka)
+  2. Telefon: 500 100 200 oraz tel:+48500100200
+  3. Miasta startowe w sprawdzarce: selA/selB w app.js (teraz Łódź → Piotrków Trybunalski)
+  4. E-mail, NIP, adres — sekcja kontakt + blok JSON-LD
+  5. Opinie — sekcja #opinie, do wklejenia z profilu Google klienta
+  ==========================================================
+-->
+<title>Kurier ekspresowy — odbiór i dostawa tego samego dnia · Polska i Europa</title>
+<meta name="description" content="Kurier ekspresowy: przesyłka odebrana i dostarczona tego samego dnia w promieniu 100 km. Transport dedykowany na całą Polskę i do Europy, jeden kierowca od odbioru do dostawy, bez sortowni i przeładunków.">
+<meta name="theme-color" content="#15181A">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kurier ekspresowy — dostawa tego samego dnia">
+<meta property="og:description" content="W promieniu 100 km odbieramy i dostarczamy tego samego dnia. Dalej — transport dedykowany na całą Polskę i do Europy.">
+<meta property="og:locale" content="pl_PL">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2315181A'/><path d='M4 20h18l4-6h-6l-2-5H4z' fill='none' stroke='%23FF6A2B' stroke-width='2'/><circle cx='10' cy='23' r='2.4' fill='%23FF6A2B'/><circle cx='21' cy='23' r='2.4' fill='%23FF6A2B'/></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css?v=1">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CourierService",
+  "name":"Kurier ekspresowy",
+  "description":"Przesyłki ekspresowe i transport dedykowany. W promieniu 100 km odbiór i dostawa tego samego dnia. Kraj i Europa.",
+  "telephone":"+48500100200",
+  "address":{"@type":"PostalAddress","addressLocality":"Łódź","addressCountry":"PL"},
+  "areaServed":["PL","DE","CZ","SK","NL","AT","LT","FR","BE"],
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}]
+}
+</script>
+</head>
+<body>
+
+<!-- ======================= EKRAN ŁADOWANIA ======================= -->
+<div id="loader" class="ziarno" role="status" aria-label="Wczytywanie strony">
+  <div class="ladowanie">
+    <span class="znak na-ciemnym">
+      <span class="iskra" aria-hidden="true"></span>
+      <span class="znak__glowny">KURIER</span>
+      <span class="znak__drugi">EKSPRESOWY</span>
+      <span class="znak__podpis">Odbiór i dostawa tego samego dnia</span>
+    </span>
+
+    <svg class="ladowanie__obwod" viewBox="0 0 300 60" fill="none" aria-hidden="true">
+      <path d="M4 44 H58" />
+      <path d="M58 44 C88 44 92 16 124 16 H168" />
+      <path class="zywa" d="M168 16 C200 16 202 44 232 44 H296" />
+      <path d="M58 44 H120" />
+      <path d="M232 44 H296" />
+    </svg>
+
+    <div class="ladowanie__licznik mono">
+      <span id="loader-etap">Przyjęcie zlecenia</span>
+      <b><span id="loader-proc">0</span>%</b>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= NAWIGACJA ======================= -->
+<header class="nawigacja" id="nawigacja">
+  <div class="wrap nawigacja__rzad">
+    <a href="#gora" class="znak na-ciemnym" style="--znak:20px" aria-label="Kurier ekspresowy — start">
+      <span class="znak__glowny">KURIER</span>
+      <span class="znak__drugi">EKSPRESOWY</span>
+    </a>
+
+    <nav>
+      <ul class="menu" id="menu">
+        <li><a href="#zasieg">Zasięg</a></li>
+        <li><a href="#zakres">Co wozimy</a></li>
+        <li><a href="#realizacje">W trasie</a></li>
+        <li><a href="#proces">Jak to działa</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+
+    <a class="tel-nav" href="tel:+48500100200">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+      500 100 200
+    </a>
+
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="gora">
+
+<!-- ======================= HERO ======================= -->
+<section class="ciemna hero ziarno">
+  <div class="hero__tlo">
+    <img src="img/hero-trasa.webp" alt="Samochód dostawczy w trasie po zmroku" fetchpriority="high" width="1600" height="1067">
+  </div>
+
+  <div class="wrap hero__tresc">
+    <p class="etykieta">Przesyłki ekspresowe · kraj i Europa</p>
+    <h1>Odbiór rano, dostawa <em>tego samego dnia</em></h1>
+    <p class="hero__lead">
+      Jeżeli adres dostawy leży w promieniu 100 km od miejsca odbioru, przesyłka jest na miejscu
+      jeszcze dziś. Jedno auto, jeden kierowca, bez sortowni i przeładunków. Dalej — transport
+      dedykowany na całą Polskę i do Europy.
+    </p>
+
+    <div class="hero__akcje">
+      <a class="guzik guzik--prad" href="#zasieg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none"/></svg>
+        Sprawdź swój adres
+      </a>
+      <a class="guzik guzik--obrys" href="tel:+48500100200">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+        Zadzwoń: 500 100 200
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PASEK TECHNICZNY ======================= -->
+<section class="ciemna pasek">
+  <div class="wrap" style="padding:0">
+    <div class="pasek__rzad">
+      <div class="pasek__poz">
+        <span class="mono">Dostawa tego samego dnia</span>
+        <b>w promieniu <i>100 km</i></b>
+      </div>
+      <div class="pasek__poz">
+        <span class="mono">Przeładunki po drodze</span>
+        <b><i>0</i> — jedno auto</b>
+      </div>
+      <div class="pasek__poz">
+        <span class="mono">Zasięg</span>
+        <b>cała Polska · Europa</b>
+      </div>
+      <div class="pasek__poz">
+        <span class="mono">Wycena kursu</span>
+        <b>przez telefon, <i>od ręki</i></b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ZASIĘG: PROMIEŃ 100 KM ======================= -->
+<section class="ciemna sekcja ziarno" id="zasieg">
+  <div class="wrap">
+    <div class="naglowek wjazd">
+      <p class="etykieta">Zasięg</p>
+      <h2>Sprawdź, czy Twoja trasa mieści się w promieniu</h2>
+      <p class="oloowek">
+        Reguła jest jedna: jeżeli adres dostawy leży w promieniu 100 kilometrów od miejsca
+        odbioru, przesyłka jedzie tego samego dnia. Wybierz dwa punkty — pokażemy odległość
+        i odpowiedź.
+      </p>
+    </div>
+
+    <div class="plansza wjazd">
+      <div class="plansza__rysunek">
+        <svg class="polska" viewBox="-60 -40 700 640" role="img" aria-label="Mapa Polski z promieniem stu kilometrów wokół miejsca odbioru">
+          <g class="siatka" fill="none">
+            <path d="M0 -20 V560 M140 -20 V560 M280 -20 V560 M420 -20 V560 M560 -20 V560"/>
+            <path d="M-40 60 H600 M-40 190 H600 M-40 320 H600 M-40 450 H600"/>
+          </g>
+
+          <path class="kraj" d="M13.8 98.1 L44.0 85.5 L86.9 73.8 L121.0 63.0 L157.3 48.6 L195.3 21.6 L236.5 25.2 L264.0 36.0 L253.0 22.5 L244.7 40.5 L255.7 58.5 L277.8 67.5 L297.0 74.7 L310.7 54.0 L363.0 55.8 L412.5 58.5 L478.5 54.0 L495.0 58.5 L511.5 70.2 L522.5 94.5 L544.5 162.0 L525.2 216.0 L506.0 243.0 L528.0 265.5 L533.5 310.5 L547.2 351.0 L555.5 373.5 L528.0 414.0 L478.5 486.0 L486.8 538.2 L440.0 522.0 L390.5 508.5 L346.5 505.8 L319.0 522.0 L302.5 486.0 L266.8 495.0 L253.0 459.0 L203.5 423.0 L159.5 409.5 L132.0 391.5 L110.0 394.2 L55.0 360.0 L44.0 371.7 L38.5 306.0 L33.0 261.0 L6.6 193.5 L22.0 153.0 L14.8 117.0 Z"/>
+
+          <!-- promień 100 km wokół miejsca odbioru -->
+          <ellipse class="krag" id="krag" cx="300" cy="292" rx="80" ry="81"/>
+
+          <!-- trasa odbiór → dostawa -->
+          <path class="tor-szary" id="tor" d="M300 292 L366 258"/>
+          <path class="trasa" id="trasa" d="M300 292 L366 258"/>
+
+          <!-- punkt odbioru -->
+          <circle class="baza-obwod" id="a-obwod" cx="300" cy="292" r="13"/>
+          <circle class="baza" id="a-punkt" cx="300" cy="292" r="5.5"/>
+          <text class="mocny" id="a-opis" x="252" y="322">ODBIÓR</text>
+
+          <!-- punkt dostawy -->
+          <circle class="punkt" id="b-punkt" cx="366" cy="258" r="6"/>
+          <text class="mocny" id="b-opis" x="378" y="252">DOSTAWA</text>
+
+          <text class="krag-opis" id="krag-opis" x="196" y="196">PROMIEŃ 100 KM</text>
+        </svg>
+      </div>
+
+      <div class="plansza__opis">
+        <div class="wybierak">
+          <label class="wybierak__pole">
+            <span class="mono">Odbiór z</span>
+            <select id="miasto-a" aria-label="Miasto odbioru"></select>
+          </label>
+          <label class="wybierak__pole">
+            <span class="mono">Dostawa do</span>
+            <select id="miasto-b" aria-label="Miasto dostawy"></select>
+          </label>
+        </div>
+
+        <div class="werdykt" id="werdykt">
+          <span class="mono werdykt__mono">Odległość w promieniu</span>
+          <p class="werdykt__tekst" id="werdykt-txt">Mieści się w promieniu</p>
+          <p class="werdykt__pod" id="werdykt-pod">Trasa krótsza niż 100 km — przesyłka jedzie tego samego dnia.</p>
+        </div>
+
+        <ul class="fakty">
+          <li><span class="mono">Odległość</span><b class="akcent"><span id="f-km">72</span> km</b></li>
+          <li><span class="mono">Promień same-day</span><b>100 km</b></li>
+          <li><span class="mono">Przeładunki po drodze</span><b>0</b></li>
+        </ul>
+
+        <p class="zastrzezenie" style="margin-top:20px">
+          Odległość liczona w linii prostej między środkami miejscowości — dokładnie tak, jak
+          wyznacza się promień. Adresu spoza listy nie ma sensu zgadywać: podaj go przez telefon,
+          dyspozytor sprawdzi w minutę.
+        </p>
+
+        <a class="guzik guzik--prad" href="tel:+48500100200" style="margin-top:20px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+          Podaj adres przez telefon
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CO WOZIMY ======================= -->
+<section class="jasna sekcja" id="zakres">
+  <div class="wrap">
+    <div class="naglowek wjazd">
+      <p class="etykieta">Zakres</p>
+      <h2>Co wozimy najczęściej</h2>
+      <p class="oloowek">
+        Wszystko, co nie może czekać do jutra: część, która zatrzymała linię, dokumenty na podpis,
+        towar do klienta, który czeka pod telefonem.
+      </p>
+    </div>
+
+    <div class="zakres zakres--3 siatka-wjazd">
+      <article class="usluga" style="--i:0">
+        <span class="usluga__nr">01</span>
+        <svg class="usluga__ikona" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M8 18 30 7l22 11-22 11z"/><path d="M8 18v24l22 11 22-11V18"/><path d="M30 29v24"/>
+        </svg>
+        <h3>Przesyłki ekspresowe</h3>
+        <p>Paczka, koperta, dokumenty. Odbieramy pod wskazanym adresem i wieziemy prosto do odbiorcy, bez sortowni.</p>
+      </article>
+
+      <article class="usluga" style="--i:1">
+        <span class="usluga__nr">02</span>
+        <svg class="usluga__ikona" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M6 20h34v22H6z"/><path d="M40 27h9l7 8v7H40z"/>
+          <circle cx="18" cy="46" r="5"/><circle cx="46" cy="46" r="5"/>
+        </svg>
+        <h3>Transport dedykowany</h3>
+        <p>Całe auto pod jedno zlecenie — bus do 1,2 tony, palety, gabaryty. Nikt inny nie jedzie z Twoim towarem.</p>
+      </article>
+
+      <article class="usluga" style="--i:2">
+        <span class="usluga__nr">03</span>
+        <svg class="usluga__ikona" viewBox="0 0 60 60" aria-hidden="true">
+          <circle cx="30" cy="30" r="22"/><path d="M30 16v15l10 6"/>
+        </svg>
+        <h3>Awaryjne dostawy części</h3>
+        <p>Postój linii albo auto na podnośniku. Jedziemy po część do dostawcy i wieziemy prosto do warsztatu.</p>
+      </article>
+
+      <article class="usluga" style="--i:3">
+        <span class="usluga__nr">04</span>
+        <svg class="usluga__ikona" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M12 10h26l10 10v30H12z"/><path d="M38 10v10h10"/><path d="M20 32h20M20 40h20M20 48h12"/>
+        </svg>
+        <h3>Dokumenty i przetargi</h3>
+        <p>Oferta, która musi być na biurku przed godziną zamknięcia. Potwierdzenie doręczenia z godziną i podpisem.</p>
+      </article>
+
+      <article class="usluga" style="--i:4">
+        <span class="usluga__nr">05</span>
+        <svg class="usluga__ikona" viewBox="0 0 60 60" aria-hidden="true">
+          <circle cx="30" cy="30" r="22"/><path d="M8 30h44M30 8c6 7 6 37 0 44M30 8c-6 7-6 37 0 44"/>
+        </svg>
+        <h3>Kursy międzynarodowe</h3>
+        <p>Niemcy, Czechy, Holandia, Austria, Litwa. Wyjazd ustalamy przy zleceniu, rozliczenie po kursie.</p>
+      </article>
+
+      <article class="usluga" style="--i:5">
+        <span class="usluga__nr">06</span>
+        <svg class="usluga__ikona" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M30 6l20 8v16c0 13-8 20-20 24C18 50 10 43 10 30V14z"/><path d="M22 30l6 6 12-12"/>
+        </svg>
+        <h3>Ładunki wrażliwe</h3>
+        <p>Sprzęt, elektronika, towar o dużej wartości. Ubezpieczenie w cenie, przewóz bez przeładunku.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= W TRASIE (GALERIA) ======================= -->
+<section class="jasna sekcja" id="realizacje" style="padding-top:0">
+  <div class="wrap">
+    <div class="naglowek wjazd">
+      <p class="etykieta">W trasie</p>
+      <h2>Tak wygląda kurs u nas</h2>
+      <p class="oloowek">
+        Załadunek, trasa, przekazanie do rąk odbiorcy. Bez magazynu po drodze i bez
+        „przesyłka oczekuje w sortowni".
+      </p>
+    </div>
+
+    <div class="galeria siatka-wjazd" id="galeria">
+      <button class="kafel k-duzy" style="--i:0" data-duze="img/g-zaladunek.webp" data-podpis="Załadunek — przesyłka trafia do auta u nadawcy">
+        <img src="img/g-zaladunek-sm.webp" alt="Załadunek kartonów do samochodu dostawczego" loading="lazy" width="800" height="600">
+        <span class="kafel__opis"><span>Załadunek u nadawcy</span><span class="mono">01</span></span>
+      </button>
+
+      <button class="kafel k-sredni" style="--i:1" data-duze="img/g-przekazanie.webp" data-podpis="Przekazanie przesyłki do rąk odbiorcy">
+        <img src="img/g-przekazanie-sm.webp" alt="Kurier przekazuje paczkę odbiorcy" loading="lazy" width="800" height="1066">
+        <span class="kafel__opis"><span>Do rąk odbiorcy</span><span class="mono">02</span></span>
+      </button>
+
+      <button class="kafel k-sredni" style="--i:2" data-duze="img/g-palety.webp" data-podpis="Palety — transport dedykowany do 1,2 tony">
+        <img src="img/g-palety-sm.webp" alt="Palety przygotowane do transportu" loading="lazy" width="800" height="1066">
+        <span class="kafel__opis"><span>Palety i gabaryty</span><span class="mono">03</span></span>
+      </button>
+
+      <button class="kafel k-szeroki" style="--i:3" data-duze="img/g-trasa.webp" data-podpis="Trasa — jeden kierowca od odbioru do dostawy">
+        <img src="img/g-trasa-sm.webp" alt="Samochód dostawczy w trasie" loading="lazy" width="800" height="500">
+        <span class="kafel__opis"><span>Jeden kierowca całą trasę</span><span class="mono">04</span></span>
+      </button>
+
+      <button class="kafel k-maly" style="--i:4" data-duze="img/g-van-otwarty.webp" data-podpis="Przestrzeń ładunkowa przygotowana pod zlecenie">
+        <img src="img/g-van-otwarty-sm.webp" alt="Otwarta przestrzeń ładunkowa busa" loading="lazy" width="800" height="800">
+        <span class="kafel__opis"><span>Całe auto pod jedno zlecenie</span><span class="mono">05</span></span>
+      </button>
+
+      <button class="kafel k-maly" style="--i:5" data-duze="img/g-magazyn.webp" data-podpis="Odbiór towaru z magazynu nadawcy">
+        <img src="img/g-magazyn-sm.webp" alt="Samochód dostawczy przy rampie magazynu" loading="lazy" width="800" height="800">
+        <span class="kafel__opis"><span>Odbiór z rampy</span><span class="mono">06</span></span>
+      </button>
+    </div>
+
+    <p class="zastrzezenie" style="color:var(--szary);margin-top:22px">
+      Zdjęcia poglądowe — po podpisaniu umowy wchodzą tu fotografie Państwa aut i realnych kursów.
+    </p>
+  </div>
+</section>
+
+<!-- ======================= PROCES ======================= -->
+<section class="jasna sekcja" id="proces" style="padding-top:0">
+  <div class="wrap">
+    <div class="naglowek wjazd">
+      <p class="etykieta">Jak to działa</p>
+      <h2>Od telefonu do podpisu odbiorcy</h2>
+    </div>
+
+    <div class="kroki siatka-wjazd">
+      <article class="krok" style="--i:0">
+        <span class="krok__nr">01</span>
+        <h3>Telefon</h3>
+        <p>Mówisz skąd, dokąd i co jedzie. W trakcie tej samej rozmowy dostajesz termin i cenę kursu.</p>
+      </article>
+      <article class="krok" style="--i:1">
+        <span class="krok__nr">02</span>
+        <h3>Podstawienie</h3>
+        <p>Kierowca rusza po przesyłkę i dostajesz do niego numer — rozmawiasz z człowiekiem w trasie, nie z infolinią.</p>
+      </article>
+      <article class="krok" style="--i:2">
+        <span class="krok__nr">03</span>
+        <h3>Trasa</h3>
+        <p>Jedziemy bez sortowni i przesiadek. Na życzenie podajemy pozycję auta w dowolnym momencie.</p>
+      </article>
+      <article class="krok" style="--i:3">
+        <span class="krok__nr">04</span>
+        <h3>Dostawa</h3>
+        <p>Podpis odbiorcy i zdjęcie przesyłki na miejscu. Fakturę wystawiamy po kursie, z terminem.</p>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======================= OPINIE ======================= -->
+<section class="jasna sekcja" id="opinie" style="padding-top:0">
+  <div class="wrap">
+    <div class="opinie-gora wjazd">
+      <div class="naglowek" style="margin-bottom:0">
+        <p class="etykieta">Opinie</p>
+        <h2>Co mówią zleceniodawcy</h2>
+        <!-- DO PODMIANY: trzy opinie z profilu Google klienta wraz z oceną i liczbą opinii -->
+        <p class="oloowek" style="margin-top:14px">
+          Tu wchodzą opinie z wizytówki Google — prawdziwe cytaty, imiona i ocena z profilu firmy.
+        </p>
+      </div>
+      <div class="ocena">
+        <span class="ocena__cyfra" id="ocena-cyfra">5,0</span>
+        <div>
+          <div class="gwiazdki" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg>
+          </div>
+          <span class="mono" style="color:var(--szary)">ocena z wizytówki Google</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="opinie siatka-wjazd">
+      <article class="opinia" style="--i:0">
+        <blockquote>Miejsce na pierwszą opinię z Google — najlepiej taką, w której klient pisze o godzinie dostawy.</blockquote>
+        <footer><span class="opinia__inicjal">—</span><span><span class="opinia__kto">Imię z profilu</span><br><span class="opinia__kiedy">data opinii</span></span></footer>
+      </article>
+      <article class="opinia" style="--i:1">
+        <blockquote>Druga opinia — ta, w której pada słowo „awaria", „na już" albo „uratowali".</blockquote>
+        <footer><span class="opinia__inicjal">—</span><span><span class="opinia__kto">Imię z profilu</span><br><span class="opinia__kiedy">data opinii</span></span></footer>
+      </article>
+      <article class="opinia" style="--i:2">
+        <blockquote>Trzecia opinia — od stałego zleceniodawcy, o współpracy ciągłej.</blockquote>
+        <footer><span class="opinia__inicjal">—</span><span><span class="opinia__kto">Imię z profilu</span><br><span class="opinia__kiedy">data opinii</span></span></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= KONTAKT ======================= -->
+<section class="ciemna sekcja ziarno" id="kontakt">
+  <div class="wrap">
+    <div class="kontakt">
+      <div class="wjazd">
+        <p class="etykieta">Kontakt</p>
+        <h2>Dzwoń o dowolnej porze — dyspozytor odbiera</h2>
+        <a class="wielki-tel" href="tel:+48500100200">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+          500 100 200
+        </a>
+        <p class="oloowek">
+          Podaj adres odbioru, adres dostawy i co jedzie. Termin i cenę kursu usłyszysz
+          w tej samej rozmowie.
+        </p>
+
+        <form class="oddzwon" id="oddzwon">
+          <input type="text" name="imie" placeholder="Imię" autocomplete="given-name" required>
+          <input type="tel" name="telefon" placeholder="Telefon" autocomplete="tel" required>
+          <button type="submit" class="guzik guzik--prad">Oddzwońcie do mnie</button>
+        </form>
+        <p class="oddzwon__info" id="oddzwon-info">
+          Zostaw numer, jeśli nie chcesz czekać na połączenie — oddzwaniamy.
+        </p>
+
+        <ul class="dane">
+          <li><span class="mono">Zgłoszenia</span><b>całą dobę, także w weekendy</b></li>
+          <li><span class="mono">E-mail</span><b><a href="mailto:biuro@example.pl">biuro@example.pl</a></b></li>
+          <li><span class="mono">Baza</span><b>Łódź — wyjazdy na cały kraj</b></li>
+          <li><span class="mono">Rozliczenie</span><b>faktura z terminem lub płatność po kursie</b></li>
+        </ul>
+      </div>
+
+      <div class="wjazd o1">
+        <div class="mapa">
+          <iframe
+            title="Mapa — obszar działania"
+            src="https://www.google.com/maps?q=%C5%81%C3%B3d%C5%BA&z=8&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= STOPKA ======================= -->
+<footer class="stopka">
+  <div class="wrap">
+    <div class="stopka__rzad">
+      <div>
+        <span class="znak na-ciemnym" style="--znak:22px">
+          <span class="znak__glowny">KURIER</span>
+          <span class="znak__drugi">EKSPRESOWY</span>
+        </span>
+        <p style="margin-top:18px;max-width:38ch;font-size:15px">
+          Przesyłki ekspresowe i transport dedykowany. W promieniu 100 km odbiór i dostawa
+          tego samego dnia. Kraj i Europa.
+        </p>
+      </div>
+      <div>
+        <h4>Strona</h4>
+        <ul>
+          <li><a href="#zasieg">Zasięg</a></li>
+          <li><a href="#zakres">Co wozimy</a></li>
+          <li><a href="#realizacje">W trasie</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="tel:+48500100200">500 100 200</a></li>
+          <li><a href="mailto:biuro@example.pl">biuro@example.pl</a></li>
+          <li>Zgłoszenia 24/7</li>
+        </ul>
+      </div>
+    </div>
+    <div class="stopka__dol">
+      <span>© <span id="rok">2026</span> Kurier ekspresowy</span>
+      <span><a href="#gora">Do góry</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="pasek-tel" href="tel:+48500100200">Zadzwoń — 500 100 200</a>
+
+<!-- powiększenie zdjęcia z galerii -->
+<div class="lupa" id="lupa" role="dialog" aria-modal="true" aria-label="Powiększone zdjęcie">
+  <button class="lupa__zamknij" id="lupa-zamknij" aria-label="Zamknij">&times;</button>
+  <img id="lupa-img" src="" alt="">
+  <span class="lupa__podpis mono" id="lupa-podpis"></span>
+</div>
+
+<script src="assets/app.js?v=1"></script>
+</body>
+</html>
