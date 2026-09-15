@@ -215,7 +215,10 @@
     <div class="karty siatka-wjazd">
       <article class="karta" style="--i:0">
         <svg class="karta__ikona" viewBox="0 0 48 48" aria-hidden="true">
-          <path d="M6 10h36v28H6z"/><path d="M6 10l9 9M42 10l-9 9M6 38l9-9M42 38l-9-9"/><rect x="17" y="19" width="14" height="10"/>
+          <rect x="5" y="11" width="38" height="23" rx="1.5"/>
+          <path d="M5 17h38M5 28h38M14 11v23M34 11v23"/>
+          <rect x="20" y="19" width="8" height="7" rx="1"/>
+          <circle cx="13" cy="39" r="3.4"/><circle cx="35" cy="39" r="3.4"/>
         </svg>
         <h3>Dzieła sztuki</h3>
         <p>
@@ -250,7 +253,9 @@
 
       <article class="karta" style="--i:2">
         <svg class="karta__ikona" viewBox="0 0 48 48" aria-hidden="true">
-          <path d="M24 6v24"/><circle cx="24" cy="36" r="6"/><path d="M24 12c6 0 10-3 12-6M24 18c8 0 13-4 16-8M8 22h8M8 30h6"/>
+          <path d="M13 9h16l4 9H9z"/><path d="M29 13.5h9"/>
+          <path d="M21 18v10"/><path d="M12 42l9-14 9 14"/><path d="M15 36h12"/>
+          <path d="M36 22l5 3M36 28h6"/>
         </svg>
         <h3>Sprzęt eventowy</h3>
         <p>
@@ -439,32 +444,32 @@
     </div>
 
     <div class="galeria siatka-wjazd" id="galeria">
-      <button class="kafel k-duzy" style="--i:0" data-duze="img/f-flota.webp" data-podpis="Flota Polski Express 24 — Kangoo, Trafic i Caddy">
+      <button class="kafel" style="--i:0" data-duze="img/f-flota.webp" data-podpis="Flota Polski Express 24 — Kangoo, Trafic i Caddy">
         <img src="img/f-flota-sm.webp" alt="Trzy samochody dostawcze Polski Express 24 zaparkowane obok siebie" loading="lazy" width="800" height="597">
         <span class="kafel__opis">Trzy auta gotowe do wyjazdu</span>
       </button>
 
-      <button class="kafel k-sredni" style="--i:1" data-duze="img/f-skrzynia.webp" data-podpis="Skrzynia transportowa z oznaczeniem „ostrożnie" — dzieła sztuki i sprzęt eventowy">
+      <button class="kafel" style="--i:1" data-duze="img/f-skrzynia.webp" data-podpis="Skrzynia transportowa z oznaczeniem „ostrożnie" — dzieła sztuki i sprzęt eventowy">
         <img src="img/f-skrzynia-sm.webp" alt="Skrzynia transportowa flight case z logo Polski Express 24 w magazynie" loading="lazy" width="800" height="800">
         <span class="kafel__opis">Skrzynia transportowa</span>
       </button>
 
-      <button class="kafel k-sredni" style="--i:2" data-duze="img/f-prom.webp" data-podpis="Volkswagen Caddy przy terminalu promowym — kurs do Skandynawii">
+      <button class="kafel" style="--i:2" data-duze="img/f-prom.webp" data-podpis="Volkswagen Caddy przy terminalu promowym — kurs do Skandynawii">
         <img src="img/f-prom-sm.webp" alt="Samochód Polski Express 24 przy terminalu promowym w Szwecji" loading="lazy" width="800" height="598">
         <span class="kafel__opis">Przeprawa do Skandynawii</span>
       </button>
 
-      <button class="kafel k-szeroki" style="--i:3" data-duze="img/f-trafic.webp" data-podpis="Renault Trafic — większe ładunki i dłuższe trasy">
+      <button class="kafel" style="--i:3" data-duze="img/f-trafic.webp" data-podpis="Renault Trafic — większe ładunki i dłuższe trasy">
         <img src="img/f-trafic-sm.webp" alt="Renault Trafic w barwach Polski Express 24" loading="lazy" width="800" height="597">
         <span class="kafel__opis">Renault Trafic</span>
       </button>
 
-      <button class="kafel k-maly" style="--i:4" data-duze="img/f-kangoo.webp" data-podpis="Renault Kangoo — kursy miejskie i przesyłki ekspresowe">
+      <button class="kafel" style="--i:4" data-duze="img/f-kangoo.webp" data-podpis="Renault Kangoo — kursy miejskie i przesyłki ekspresowe">
         <img src="img/f-kangoo-sm.webp" alt="Renault Kangoo w barwach Polski Express 24" loading="lazy" width="800" height="597">
         <span class="kafel__opis">Renault Kangoo</span>
       </button>
 
-      <button class="kafel k-maly" style="--i:5" data-duze="img/f-kangoo-tyl.webp" data-podpis="Oznakowanie floty — kurier, transport, logistyka">
+      <button class="kafel" style="--i:5" data-duze="img/f-kangoo-tyl.webp" data-podpis="Oznakowanie floty — kurier, transport, logistyka">
         <img src="img/f-kangoo-tyl-sm.webp" alt="Tył samochodu dostawczego z logo Polski Express 24" loading="lazy" width="800" height="800">
         <span class="kafel__opis">Oznakowanie floty</span>
       </button>
@@ -603,7 +608,7 @@
   <div class="wrap">
     <div class="stopka__rzad">
       <div>
-        <span class="stopka__znak"><img src="img/logo.png" alt="Polski Express 24" width="914" height="230"></span>
+        <span class="stopka__znak"><img src="img/logo.png" alt="Polski Express 24"></span>
         <p style="margin-top:18px;max-width:40ch;font-size:15px">
           Transport dedykowany i przesyłki ekspresowe. Jeden samochód, jeden klient —
           w Polsce, Niemczech, Skandynawii i Austrii.
